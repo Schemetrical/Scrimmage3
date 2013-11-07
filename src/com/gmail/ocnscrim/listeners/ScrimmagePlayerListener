@@ -14,18 +14,18 @@ class ScrimmagePlayerListener implements Listener {
     this.plugin = plugin;
   }
   
-  	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent event){
+  @EventHandler
+  public void onPlayerMove(PlayerMoveEvent event){
 		
-	}
+  }
 	
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event){
+  @EventHandler
+  public void onPlayerJoin(PlayerJoinEvent event){
 				
-	}
+  }
 	
-	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent event){
+  @EventHandler
+  public void onPlayerQuit(PlayerQuitEvent event){
 		
   }
  
