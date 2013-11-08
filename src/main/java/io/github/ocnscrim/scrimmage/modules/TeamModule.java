@@ -75,4 +75,13 @@ public class TeamModule extends Module {
 		}
 	}
 
+	/**
+	 * Returns a list with all teams specified in the XML
+	 *
+	 * @return List with all MapTeam objects specified in the XML
+	 */
+	public List<MapTeam> getTeams() {
+		return t;
+	}
+
 }
