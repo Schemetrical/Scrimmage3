@@ -24,65 +24,50 @@
 package io.github.ocnscrim.scrimmage.modules;
 
 import io.github.ocnscrim.scrimmage.map.Map;
-import io.github.ocnscrim.scrimmage.map.MapTeam;
 import io.github.ocnscrim.scrimmage.match.Match;
-import io.github.ocnscrim.scrimmage.utils.StringUtils;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
 import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.ChatColor;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Class that is used for controlling teams based on XML
+ * Module for controlling map rules based on XML
  *
  * @author Maxim Salikhov
  */
-public class TeamModule extends Module {
+public class RuleModule extends Module {
 
-	List<MapTeam> t;
+	List<String> rules;
 
 	/**
-	 * Basic constructor for TeamModule, utilizing the the inherited constructor
-	 * from Module.
+	 * Default constructor using superclass Module constructor
 	 *
 	 * @param mat
 	 * @param map
 	 */
-	public TeamModule(Match mat, Map map) {
+	public RuleModule(Match mat, Map map) {
 		super(mat, map);
-		t = new ArrayList<MapTeam>();
-		Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "teams");
+		rules = new ArrayList<String>();
+		Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "rules");
 		if (n != null) {
 			if (n.getNodeType() == Node.ELEMENT_NODE) {
 				NodeList ns = n.getChildNodes();
 				for (int c = 0; c < ns.getLength(); c++) {
-					Node n_chi = ns.item(c);
-					if (n_chi.getNodeType() == Node.ELEMENT_NODE) {
-						Element ec = (Element) n_chi;
-						String name = ec.getTextContent();
-						ChatColor cl = StringUtils.getChatColorFromString(ec.getAttribute("color"));
-						Integer max = Integer.parseInt(ec.getAttribute("max"));
-						if (ec.getAttribute("max-overfill") != null) {
-							t.add(new MapTeam(name, cl, max, Integer.parseInt(ec.getAttribute("max-overfill"))));
-						} else {
-							t.add(new MapTeam(name, cl, max));
-						}
+					Node nc = ns.item(c);
+					if (nc.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) nc;
+						String rule = e.getTextContent();
+						rules.add(rule);
 					}
 				}
 			}
 		}
 	}
 
-	/**
-	 * Returns a list with all teams specified in the XML
-	 *
-	 * @return List with all MapTeam objects specified in the XML
-	 */
-	public List<MapTeam> getTeams() {
-		return t;
+	public List<String> getRules() {
+		return rules;
 	}
 
 }

@@ -28,6 +28,8 @@ import io.github.ocnscrim.scrimmage.map.MapAuthor;
 import io.github.ocnscrim.scrimmage.map.MapAuthor.MapAuthorType;
 import io.github.ocnscrim.scrimmage.map.MapProtocol;
 import io.github.ocnscrim.scrimmage.match.Match;
+import io.github.ocnscrim.scrimmage.utils.XMLUtils;
+import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -60,11 +62,7 @@ public class MapInfoModule extends Module {
 		super(mat, map);
 		mproto = new MapProtocol(x.getDoc().getDocumentElement()
 			.getAttribute("proto"));
-		NodeList ns_name = x.getDoc().getElementsByTagName("name");
-		Node n_name = null;
-		if (ns_name.getLength() > 0) {
-			n_name = ns_name.item(0);
-		}
+		Node n_name = XMLUtils.getFirstNodeByName(x.getDoc(), "name");
 		if (n_name != null) {
 			if (n_name.getNodeType() == Node.ELEMENT_NODE) {
 				Element e_name = (Element) n_name;
@@ -72,11 +70,7 @@ public class MapInfoModule extends Module {
 			}
 
 		}
-		NodeList ns_ver = x.getDoc().getElementsByTagName("version");
-		Node n_ver = null;
-		if (ns_ver.getLength() > 0) {
-			n_ver = ns_ver.item(0);
-		}
+		Node n_ver = XMLUtils.getFirstNodeByName(x.getDoc(), "version");
 		if (n_ver != null) {
 			if (n_ver.getNodeType() == Node.ELEMENT_NODE) {
 				Element e_ver = (Element) n_ver;
@@ -84,11 +78,7 @@ public class MapInfoModule extends Module {
 			}
 
 		}
-		NodeList ns_obj = x.getDoc().getElementsByTagName("objective");
-		Node n_obj = null;
-		if (ns_obj.getLength() > 0) {
-			n_obj = ns_obj.item(0);
-		}
+		Node n_obj = XMLUtils.getFirstNodeByName(x.getDoc(), "objective");
 		if (n_obj != null) {
 			if (n_obj.getNodeType() == Node.ELEMENT_NODE) {
 				Element e_obj = (Element) n_obj;
@@ -96,16 +86,9 @@ public class MapInfoModule extends Module {
 			}
 
 		}
-		NodeList ns_aut = x.getDoc().getElementsByTagName("authors");
-		NodeList ns_con = x.getDoc().getElementsByTagName("contributors");
-		Node n_aut = null;
-		Node n_con = null;
-		if (ns_aut.getLength() > 0) {
-			n_aut = ns_aut.item(0);
-		}
-		if (ns_con.getLength() > 0) {
-			n_con = ns_con.item(0);
-		}
+		ma = new ArrayList<MapAuthor>();
+		Node n_aut = XMLUtils.getFirstNodeByName(x.getDoc(), "authors");
+		Node n_con = XMLUtils.getFirstNodeByName(x.getDoc(), "contributors");
 		if (n_aut != null) {
 			if (n_aut.getNodeType() == Node.ELEMENT_NODE) {
 				Element e_aut = (Element) n_aut;
