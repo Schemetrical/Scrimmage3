@@ -30,4 +30,19 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Maxim Salikhov
  */
 public class Scrimmage extends JavaPlugin {
+
+	private static Scrimmage _i;
+	
+	public void onDisable() {
+
+	}
+	
+	public void onEnable() {
+		Scrimmage._i = this;
+	}
+	
+	public static Scrimmage get() {
+		return Scrimmage._i;
+	}
+	
 }
