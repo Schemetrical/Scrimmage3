@@ -21,13 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.github.ocnscrim.scrimmage;
+package io.github.ocnscrim.scrimmage.modules;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import io.github.ocnscrim.scrimmage.XMLDocument;
+import io.github.ocnscrim.scrimmage.map.Map;
+import io.github.ocnscrim.scrimmage.match.Match;
 
 /**
+ * Base module for creating other modules with easily accessible XML document
+ * values.
  * 
  * @author Maxim Salikhov
+ * @see Match
+ * @see Map
  */
-public class Scrimmage extends JavaPlugin {
+public abstract class Module {
+
+	Match mt;
+	Map mp;
+	XMLDocument x;
+
+	/**
+	 * Constructor that sets the correct values to the basic necessary
+	 * variables.
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public Module(Match mat, Map map) {
+		mt = mat;
+		mp = map;
+		x = mp.getXMLDocument();
+	}
+
 }

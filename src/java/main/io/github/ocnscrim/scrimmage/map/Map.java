@@ -21,13 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.github.ocnscrim.scrimmage;
+package io.github.ocnscrim.scrimmage.map;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import io.github.ocnscrim.scrimmage.XMLDocument;
+import java.io.File;
 
 /**
  * 
  * @author Maxim Salikhov
  */
-public class Scrimmage extends JavaPlugin {
+public class Map {
+
+	File d;
+	XMLDocument x;
+
+	public Map(File dir) {
+		d = dir;
+		x = new XMLDocument(d);
+	}
+
+	public XMLDocument getXMLDocument() {
+		return x;
+	}
+
 }

@@ -23,11 +23,38 @@
  */
 package io.github.ocnscrim.scrimmage;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import java.io.File;
+import java.io.IOException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
  * 
  * @author Maxim Salikhov
  */
-public class Scrimmage extends JavaPlugin {
+public class XMLDocument {
+
+	File f;
+	Document d;
+
+	public XMLDocument(File file) {
+		try {
+			f = file;
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			d = db.parse(f);
+			d.getDocumentElement().normalize();
+		} catch (SAXException ex) {
+		} catch (IOException ex) {
+		} catch (ParserConfigurationException ex) {
+		}
+	}
+
+	public Document getDoc() {
+		return d;
+	}
+
 }

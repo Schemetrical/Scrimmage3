@@ -21,13 +21,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.github.ocnscrim.scrimmage;
+package io.github.ocnscrim.scrimmage.map;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 
+ *
  * @author Maxim Salikhov
  */
-public class Scrimmage extends JavaPlugin {
+public class MapProtocol {
+
+	String s;
+	List<Integer> vers;
+
+	public MapProtocol(String str) {
+		s = str;
+		vers = new ArrayList<Integer>();
+		String[] strs = s.split(".");
+		for (String s : strs) {
+			vers.add(Integer.parseInt(s));
+		}
+	}
+
+	public String getString() {
+		return s;
+	}
+
+	public Integer getInt(int index) {
+		if (index > vers.size() - 1) {
+			return null;
+		} else {
+			return vers.get(index);
+		}
+	}
+
+	public List<Integer> getAllSubversions() {
+		return vers;
+	}
+
+	public boolean isEqual(MapProtocol mp) {
+		int validcount = 0;
+		int totalcount = 0;
+		for (Integer ti : vers) {
+			for (Integer si : mp.getAllSubversions()) {
+				if (ti == si) {
+					validcount++;
+					totalcount++;
+				} else {
+					totalcount++;
+				}
+			}
+		}
+		return totalcount == validcount;
+	}
+
 }

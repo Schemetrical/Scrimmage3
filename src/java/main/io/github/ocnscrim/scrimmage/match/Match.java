@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.github.ocnscrim.scrimmage;
 
-import org.bukkit.plugin.java.JavaPlugin;
+package io.github.ocnscrim.scrimmage.match;
 
 /**
- * 
+ *
  * @author Maxim Salikhov
  */
-public class Scrimmage extends JavaPlugin {
+public class Match {
+
 }
