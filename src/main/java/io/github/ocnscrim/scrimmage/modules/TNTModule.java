@@ -25,6 +25,7 @@ package io.github.ocnscrim.scrimmage.modules;
 
 import io.github.ocnscrim.scrimmage.map.Map;
 import io.github.ocnscrim.scrimmage.match.Match;
+import io.github.ocnscrim.scrimmage.utils.StringUtils;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -61,27 +62,16 @@ public class TNTModule extends Module {
                                 yield = Integer.parseInt(e.getTextContent());
                                 break;
                             case "instantignite":
-                                insta = parse(e.getTextContent());
+                                insta = StringUtils.parseBoolean(e.getTextContent());
                                 break;
                             case "blockdamaage":
-                                blockDamage = parse(e.getTextContent());
+                                blockDamage = StringUtils.parseBoolean(e.getTextContent());
                                 break;
                         }
                     }
                 }
             }
         }
-    }
-
-    private boolean parse(String s) {
-        switch (s) {
-            case "on":
-                return true;
-            case "off":
-                return false;
-        }
-
-        return false;
     }
 
     /**

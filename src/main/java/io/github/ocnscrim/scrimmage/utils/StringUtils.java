@@ -70,4 +70,19 @@ public class StringUtils {
 		}
 		return null;
 	}
+
+    /**
+     * @param s
+     * @return Boolean crreated from on/off
+     */
+    public static boolean parseBoolean(String s) {
+        switch (s) {
+            case "on":
+                return true;
+            case "off":
+                return false;
+        }
+
+        return false;
+    }
 }
