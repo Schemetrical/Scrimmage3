@@ -24,6 +24,7 @@
 package io.github.ocnscrim.scrimmage.utils;
 
 import org.bukkit.ChatColor;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 /**
  * Class with some string utilities
@@ -42,5 +43,13 @@ public class StringUtils {
 		s = s.replaceAll(" ", "_");
 		return ChatColor.getByChar(s);
 	}
+
+    public static EntityDamageEvent.DamageCause getDamageCauseFromString(String s){
+        for(EntityDamageEvent.DamageCause cause : EntityDamageEvent.DamageCause.values()) {
+            if (cause.name().equalsIgnoreCase(s)) return cause;
+        }
+        return null;
+    }
+
 
 }
