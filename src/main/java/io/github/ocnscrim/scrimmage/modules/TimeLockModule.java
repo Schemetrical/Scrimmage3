@@ -37,6 +37,7 @@ import org.w3c.dom.Node;
  */
 public class TimeLockModule extends Module {
     boolean enabled;
+    int lockAt;
 
     /**
      * Default constructor using superclass Module constructor
@@ -48,7 +49,12 @@ public class TimeLockModule extends Module {
         super(mat, map);
         Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "timelock");
         if (n != null) {
-            enabled = StringUtils.parseBoolean(n.getTextContent());
+            try {
+                lockAt = Integer.parseInt(n.getTextContent());
+                enabled = true;
+            } catch (NumberFormatException e) {
+                enabled = StringUtils.parseBoolean(n.getTextContent());
+            }
         }
     }
 
@@ -57,6 +63,13 @@ public class TimeLockModule extends Module {
      */
     public boolean isEnabled() {
         return enabled;
+    }
+
+    /**
+     * @return Tick to lock day/night cycle at
+     */
+    public int getLockAt() {
+        return lockAt;
     }
 
 }
