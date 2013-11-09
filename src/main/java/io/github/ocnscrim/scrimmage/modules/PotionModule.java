@@ -4,7 +4,7 @@ import io.github.ocnscrim.scrimmage.map.Map;
 import io.github.ocnscrim.scrimmage.match.Match;
 import io.github.ocnscrim.scrimmage.utils.StringUtils;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.potion.PotionEffect;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that controls the damags that will be disabled in maps
+ * Class to control potion effects a player spawns with
  *
  * @author Jake0oo0
  */
-public class DisableDamageModule extends Module {
+public class PotionModule extends Module {
 
-    List<EntityDamageEvent.DamageCause> damages;
+    List<PotionEffect> potions;
 
     /**
      * Default constructor using superclass Module constructor
@@ -27,10 +27,10 @@ public class DisableDamageModule extends Module {
      * @param mat
      * @param map
      */
-    public DisableDamageModule(Match mat, Map map) {
+    public PotionModule(Match mat, Map map) {
         super(mat, map);
-        damages = new ArrayList<EntityDamageEvent.DamageCause>();
-        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "disabledamage");
+        potions = new ArrayList<PotionEffect>();
+        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "potions");
         if (n != null) {
             if (n.getNodeType() == Node.ELEMENT_NODE) {
                 NodeList ns = n.getChildNodes();
@@ -38,15 +38,20 @@ public class DisableDamageModule extends Module {
                     Node nc = ns.item(c);
                     if (nc.getNodeType() == Node.ELEMENT_NODE) {
                         Element e = (Element) nc;
-                        String damage = e.getTextContent();
-                        damages.add(StringUtils.getDamageCauseFromString(damage));
+                        String potionString = e.getTextContent();
+                        // A potionString would look like 'NIGHT_VISION,30,1'
+                        String[] array = potionString.split(",");
+                        String type = array[0];
+                        int duration = Integer.parseInt(array[1]);
+                        int level = Integer.parseInt(array[2]);
+                        potions.add(StringUtils.getPotionEffectFromString(type, duration, level));
                     }
                 }
             }
         }
     }
 
-    public List<EntityDamageEvent.DamageCause> getDisabled() {
-        return damages;
+    public List<PotionEffect> getPotions() {
+        return potions;
     }
 }
