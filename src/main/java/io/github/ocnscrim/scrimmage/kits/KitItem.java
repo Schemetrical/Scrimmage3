@@ -21,53 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.github.ocnscrim.scrimmage.utils;
+package io.github.ocnscrim.scrimmage.kits;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.enchantments.Enchantment;
 
 /**
- * Class with some string utilities
+ * Class for storing information about a KitItem per XML
  * 
  * @author Maxim Salikhov
  */
-public class StringUtils {
+public class KitItem {
+
+	int s;
+	Material m;
+	Enchantment e;
+	int el;
+	String l;
+	String n;
+	int d;
 
 	/**
-	 * Returns the ChatColor based on the string that has been put in
+	 * Constructor requesting all info about an item. It is possible for some
+	 * values to be null.
 	 * 
-	 * @param s
-	 * @return ChatColor resulting from string
+	 * @param slot
+	 * @param mat
+	 * @param echantment
+	 * @param lore
+	 * @param name
+	 * @param damage
 	 */
-	public static ChatColor getChatColorFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return ChatColor.getByChar(s);
-	}
-
-	/**
-	 * Returns the Material based on the string put in
-	 * 
-	 * @param s
-	 * @return Material resulting from string
-	 */
-	public static Material getMaterialFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return Material.getMaterial(s);
-	}
-
-	/**
-	 * Returns the DamageCause based on the string that has been put in
-	 * 
-	 * @param s
-	 * @return DamageCause resulting from string
-	 */
-	public static EntityDamageEvent.DamageCause getDamageCauseFromString(String s) {
-		for (EntityDamageEvent.DamageCause cause : EntityDamageEvent.DamageCause.values()) {
-			if (cause.name().equalsIgnoreCase(s)) {
-				return cause;
-			}
-		}
-		return null;
+	public KitItem(int slot, Material mat, String echantment, String lore,
+			String name, int damage) {
+		s = slot;
+		m = mat;
+		l = lore;
+		n = name;
+		d = damage;
 	}
 }

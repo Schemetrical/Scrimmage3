@@ -23,51 +23,46 @@
  */
 package io.github.ocnscrim.scrimmage.utils;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.event.entity.EntityDamageEvent;
-
 /**
- * Class with some string utilities
  * 
  * @author Maxim Salikhov
  */
-public class StringUtils {
+public class TimeUtils {
 
 	/**
-	 * Returns the ChatColor based on the string that has been put in
+	 * Returns time based on the input string containing modifiers
 	 * 
 	 * @param s
-	 * @return ChatColor resulting from string
+	 * @return int time in seconds
 	 */
-	public static ChatColor getChatColorFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return ChatColor.getByChar(s);
-	}
-
-	/**
-	 * Returns the Material based on the string put in
-	 * 
-	 * @param s
-	 * @return Material resulting from string
-	 */
-	public static Material getMaterialFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return Material.getMaterial(s);
-	}
-
-	/**
-	 * Returns the DamageCause based on the string that has been put in
-	 * 
-	 * @param s
-	 * @return DamageCause resulting from string
-	 */
-	public static EntityDamageEvent.DamageCause getDamageCauseFromString(String s) {
-		for (EntityDamageEvent.DamageCause cause : EntityDamageEvent.DamageCause.values()) {
-			if (cause.name().equalsIgnoreCase(s)) {
-				return cause;
-			}
+	public static int parseTimeStringIntoSecs(String s) {
+		if (s.contains("s")) {
+			s = s.replaceAll("[^\\d.]", "");
+			int i = Integer.parseInt(s);
+			return i;
+		} else if (s.contains("m")) {
+			s = s.replaceAll("[^\\d.]", "");
+			int i = Integer.parseInt(s) * 60;
+			return i;
+		} else if (s.contains("h")) {
+			s = s.replaceAll("[^\\d.]", "");
+			int i = Integer.parseInt(s) * 3600;
+			return i;
+		} else if (s.contains("d")) {
+			s = s.replaceAll("[^\\d.]", "");
+			int i = Integer.parseInt(s) * 86400;
+			return i;
+		} else if (s.contains("mo")) {
+			s = s.replaceAll("[^\\d.]", "");
+			int i = Integer.parseInt(s) * 2592000;
+			return i;
+		} else if (s.contains("y")) {
+			s = s.replaceAll("[^\\d.]", "");
+			int i = Integer.parseInt(s) * 31104000;
+			return i;
+		} else {
+			return Integer.parseInt(s);
 		}
-		return null;
 	}
+
 }

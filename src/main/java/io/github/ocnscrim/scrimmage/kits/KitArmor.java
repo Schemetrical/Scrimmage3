@@ -21,53 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.github.ocnscrim.scrimmage.utils;
+package io.github.ocnscrim.scrimmage.kits;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 
 /**
- * Class with some string utilities
+ * Class for storing a piece of information about a piece of armor per XML
  * 
  * @author Maxim Salikhov
  */
-public class StringUtils {
+public class KitArmor {
+
+	KitArmorType t;
+	Material m;
+	Enchantment e;
+	int el;
+	String l;
+	String n;
+	int d;
+	String c;
+	ItemStack is;
 
 	/**
-	 * Returns the ChatColor based on the string that has been put in
+	 * Constructor requesting all info about an item. It is possible for some
+	 * values to be null.
 	 * 
-	 * @param s
-	 * @return ChatColor resulting from string
+	 * @param type
+	 * @param mat
+	 * @param echantment
+	 * @param lore
+	 * @param name
+	 * @param damage
+	 * @param color
 	 */
-	public static ChatColor getChatColorFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return ChatColor.getByChar(s);
-	}
-
-	/**
-	 * Returns the Material based on the string put in
-	 * 
-	 * @param s
-	 * @return Material resulting from string
-	 */
-	public static Material getMaterialFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return Material.getMaterial(s);
-	}
-
-	/**
-	 * Returns the DamageCause based on the string that has been put in
-	 * 
-	 * @param s
-	 * @return DamageCause resulting from string
-	 */
-	public static EntityDamageEvent.DamageCause getDamageCauseFromString(String s) {
-		for (EntityDamageEvent.DamageCause cause : EntityDamageEvent.DamageCause.values()) {
-			if (cause.name().equalsIgnoreCase(s)) {
-				return cause;
-			}
+	public KitArmor(KitArmorType type, Material mat, String echantment,
+			String lore, String name, int damage, String color) {
+		t = type;
+		m = mat;
+		l = lore;
+		n = name;
+		d = damage;
+		c = color;
+		is = new ItemStack(m);
+		if (d != 0) {
+			is.setDurability((short) d);
 		}
-		return null;
 	}
+
 }

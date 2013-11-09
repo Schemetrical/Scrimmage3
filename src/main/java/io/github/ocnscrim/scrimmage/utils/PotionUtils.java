@@ -23,51 +23,41 @@
  */
 package io.github.ocnscrim.scrimmage.utils;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
- * Class with some string utilities
+ * Class with utilities regarding potions
  * 
  * @author Maxim Salikhov
+ * @author Jake0oo0
  */
-public class StringUtils {
+public class PotionUtils {
 
 	/**
-	 * Returns the ChatColor based on the string that has been put in
+	 * Returns a PotionEffect based on the arguments given
+	 * 
+	 * @param type
+	 * @param dur
+	 *            in seconds
+	 * @param amp
+	 * @param ambient
+	 * @return PotionEffect
+	 */
+	public static PotionEffect getPotionEffectFromString(PotionEffectType type,
+			int dur, int amp, boolean ambient) {
+		return new PotionEffect(type, dur, amp, ambient);
+	}
+
+	/**
+	 * Returns the PotionEffectType based on the input string
 	 * 
 	 * @param s
-	 * @return ChatColor resulting from string
+	 * @return PotionEffectType based on string
 	 */
-	public static ChatColor getChatColorFromString(String s) {
+	public static PotionEffectType getPotionEffectTypeFromString(String s) {
 		s = s.replaceAll(" ", "_").toUpperCase();
-		return ChatColor.getByChar(s);
+		return PotionEffectType.getByName(s);
 	}
 
-	/**
-	 * Returns the Material based on the string put in
-	 * 
-	 * @param s
-	 * @return Material resulting from string
-	 */
-	public static Material getMaterialFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return Material.getMaterial(s);
-	}
-
-	/**
-	 * Returns the DamageCause based on the string that has been put in
-	 * 
-	 * @param s
-	 * @return DamageCause resulting from string
-	 */
-	public static EntityDamageEvent.DamageCause getDamageCauseFromString(String s) {
-		for (EntityDamageEvent.DamageCause cause : EntityDamageEvent.DamageCause.values()) {
-			if (cause.name().equalsIgnoreCase(s)) {
-				return cause;
-			}
-		}
-		return null;
-	}
 }

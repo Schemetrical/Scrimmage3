@@ -21,53 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.github.ocnscrim.scrimmage.utils;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.event.entity.EntityDamageEvent;
+package io.github.ocnscrim.scrimmage.kits;
 
 /**
- * Class with some string utilities
- * 
+ * Enum containing types of armor pieces
+ *
  * @author Maxim Salikhov
  */
-public class StringUtils {
+public enum KitArmorType {
 
-	/**
-	 * Returns the ChatColor based on the string that has been put in
-	 * 
-	 * @param s
-	 * @return ChatColor resulting from string
-	 */
-	public static ChatColor getChatColorFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return ChatColor.getByChar(s);
-	}
-
-	/**
-	 * Returns the Material based on the string put in
-	 * 
-	 * @param s
-	 * @return Material resulting from string
-	 */
-	public static Material getMaterialFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return Material.getMaterial(s);
-	}
-
-	/**
-	 * Returns the DamageCause based on the string that has been put in
-	 * 
-	 * @param s
-	 * @return DamageCause resulting from string
-	 */
-	public static EntityDamageEvent.DamageCause getDamageCauseFromString(String s) {
-		for (EntityDamageEvent.DamageCause cause : EntityDamageEvent.DamageCause.values()) {
-			if (cause.name().equalsIgnoreCase(s)) {
-				return cause;
-			}
-		}
-		return null;
-	}
+	HELMET, CHESTPLATE, LEGGINGS, BOOTS;
 }
