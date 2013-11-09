@@ -24,6 +24,8 @@
 package io.github.ocnscrim.scrimmage.kits;
 
 import java.util.List;
+
+import io.github.ocnscrim.scrimmage.modules.HungerModule;
 import org.bukkit.entity.Player;
 
 /**
@@ -37,6 +39,8 @@ public class Kit {
 	List<KitItem> ki;
 	List<KitArmor> ka;
 	List<KitPotion> kp;
+    KitHunger kh;
+    KitHealth ke;
 
 	/**
 	 * Basic constructor for a kit, without a parent
@@ -51,6 +55,8 @@ public class Kit {
 		ki = kiti;
 		ka = kita;
 		kp = kitp;
+        kh = new KitHunger(20, 5.0F);
+        ke = new KitHealth(20, 20);
 	}
 
 	/**
@@ -68,6 +74,8 @@ public class Kit {
 		ki = kiti;
 		ka = kita;
 		kp = kitp;
+        kh = new KitHunger(20, 5.0F);
+        ke = new KitHealth(20, 20);
 		for (KitItem it : parent.getItems()) {
 			ki.add(it);
 		}

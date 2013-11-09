@@ -73,7 +73,7 @@ public class StringUtils {
 
     /**
      * @param s
-     * @return Boolean crreated from on/off
+     * @return Boolean created from on/off
      */
     public static boolean parseBoolean(String s) {
         switch (s) {

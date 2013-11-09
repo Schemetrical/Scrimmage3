@@ -47,6 +47,7 @@ public class TimeLockModule extends Module {
      */
     public TimeLockModule(Match mat, Map map) {
         super(mat, map);
+        enabled = false;
         Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "timelock");
         if (n != null) {
             try {

@@ -238,8 +238,8 @@ public class KitModule extends Module {
 														ambient = false;
 													}
 												} else {
-													ambient = false;
-												}
+                                                ambient = false;
+                                            }
 												potionamp = Integer.parseInt(ec.getAttribute("amplifier"));
 												kp.add(new KitPotion(poteff, potiondur, potionamp, ambient));
 												break;
