@@ -24,6 +24,9 @@
 package io.github.ocnscrim.scrimmage.utils;
 
 import org.bukkit.ChatColor;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  * Class with some string utilities
@@ -43,4 +46,46 @@ public class StringUtils {
 		return ChatColor.getByChar(s);
 	}
 
+    /**
+     * Returns the DamageCause based on the string that has been put in
+     *
+     * @param s
+     * @return DamageCause resulting from string
+     */
+    public static EntityDamageEvent.DamageCause getDamageCauseFromString(String s){
+        for(EntityDamageEvent.DamageCause cause : EntityDamageEvent.DamageCause.values()) {
+            if (cause.name().equalsIgnoreCase(s)) return cause;
+        }
+        return null;
+    }
+
+    /**
+     * Returns the PotionEffectType based on the string that has been put in
+     *
+     * @param s
+     * @return PotionEffectType resulting from string
+     */
+    public static PotionEffectType getPotionEffectTypeFromString(String s){
+        for(PotionEffectType effect : PotionEffectType.values()) {
+            if (effect.getName().equalsIgnoreCase(s)) return effect;
+        }
+        return null;
+    }
+
+    /**
+     * Returns a PotionEffect based on the arguments given
+     *
+     * @param effect
+     * @param duration In seconds
+     * @param level
+     * @return PotionEffect
+     */
+    public static PotionEffect getPotionEffectFromString(String effect, int duration, int level) {
+        if (getPotionEffectTypeFromString(effect) != null) {
+            PotionEffectType type = getPotionEffectTypeFromString(effect);
+            PotionEffect finalEffect = type.createEffect(duration * 20, level);
+            return finalEffect;
+        }
+        return null;
+    }
 }
