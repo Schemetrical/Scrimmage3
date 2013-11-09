@@ -38,16 +38,27 @@ public class TNTModule extends Module {
                                 yield = Integer.parseInt(e.getTextContent());
                                 break;
                             case "instantignite":
-                                insta = Boolean.parseBoolean(e.getTextContent());
+                                insta = parse(e.getTextContent());
                                 break;
                             case "blockdamaage":
-                                blockDamage = Boolean.parseBoolean(e.getTextContent());
+                                blockDamage = parse(e.getTextContent());
                                 break;
                         }
                     }
                 }
             }
         }
+    }
+
+    private boolean parse(String s) {
+        switch (s) {
+            case "on":
+                return true;
+            case "off":
+                return false;
+        }
+
+        return false;
     }
 
     /**
