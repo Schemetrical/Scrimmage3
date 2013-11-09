@@ -25,19 +25,19 @@ package io.github.ocnscrim.scrimmage.modules;
 
 import io.github.ocnscrim.scrimmage.map.Map;
 import io.github.ocnscrim.scrimmage.match.Match;
-import io.github.ocnscrim.scrimmage.utils.StringUtils;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Class to handle depletion of hunger
+ * Class for controling Blitz gamemode
  *
  * @author Jake0oo0
  */
-public class HungerModule extends Module {
-    boolean depletes;
+public class BlitzModule extends Module {
+    int lives;
+    String title;
 
     /**
      * Default constructor using superclass Module constructor
@@ -45,9 +45,9 @@ public class HungerModule extends Module {
      * @param mat
      * @param map
      */
-    public HungerModule(Match mat, Map map) {
+    public BlitzModule(Match mat, Map map) {
         super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "hunger");
+        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "blitz");
         if (n != null) {
             if (n.getNodeType() == Node.ELEMENT_NODE) {
                 NodeList ns = n.getChildNodes();
@@ -55,14 +55,26 @@ public class HungerModule extends Module {
                     Node nc = ns.item(c);
                     if (nc.getNodeType() == Node.ELEMENT_NODE) {
                         Element e = (Element) nc;
-                        depletes = StringUtils.parseBoolean(e.getTextContent());
+                        switch(e.getTagName()) {
+                            case "title":
+                                title = e.getTextContent();
+                                break;
+                            case "lives":
+                                lives = Integer.parseInt(e.getTextContent());
+                                break;
+                        }
                     }
                 }
             }
         }
     }
 
-    public boolean isDepleting() {
-        return depletes;
+    public int getLives() {
+        return lives;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
 }
