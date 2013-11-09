@@ -35,11 +35,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Class that controls the damags that will be disabled in maps
+ * Class that controls the damages that will be disabled in maps
  *
  * @author Jake0oo0
  */
-@Deprecated
 public class DisableDamageModule extends Module {
 
 	List<EntityDamageEvent.DamageCause> damages;
