@@ -29,10 +29,12 @@ import io.github.ocnscrim.scrimmage.map.MapAuthor.MapAuthorType;
 import io.github.ocnscrim.scrimmage.map.MapProtocol;
 import io.github.ocnscrim.scrimmage.match.Match;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Difficulty;
+import org.bukkit.World;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -53,6 +55,7 @@ public class MapInfoModule extends Module {
 	List<MapAuthor> ma;
     Difficulty dif;
     int mh;
+    World.Environment dim;
 
 	/**
 	 * The basic constructor for MapInfoModule, has no function except to allow
@@ -95,6 +98,13 @@ public class MapInfoModule extends Module {
             if (n_dif.getNodeType() == Node.ELEMENT_NODE) {
                 Element e_dif = (Element) n_obj;
                 dif = Difficulty.getByValue(Integer.parseInt(e_dif.getTextContent()));
+            }
+        }
+        Node n_dim = XMLUtils.getFirstNodeByName(x.getDoc(), "dimension");
+        if (n_dim != null) {
+            if (n_dim.getNodeType() == Node.ELEMENT_NODE) {
+                Element e_dim = (Element) n_obj;
+                dim = World.Environment.valueOf(e_dim.getTextContent().toUpperCase());
             }
         }
         Node n_max = XMLUtils.getFirstNodeByName(x.getDoc(), "maxbuildheight");
