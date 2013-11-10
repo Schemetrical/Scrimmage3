@@ -26,8 +26,8 @@ package io.github.ocnscrim.scrimmage.map;
 import org.bukkit.ChatColor;
 
 /**
- * Class serving to store information regarding amplifier team, such as player count,
- * color and name.
+ * Class serving to store information regarding amplifier team, such as player
+ * count, color and name.
  * 
  * @author msalihov (Maxim Salikhov)
  */
@@ -39,7 +39,8 @@ public class MapTeam {
 	private Integer maxOverfill;
 
 	/**
-	 * Basic constructor for amplifier MapTeam, getting all parameters from constructor.
+	 * Basic constructor for amplifier MapTeam, getting all parameters from
+	 * constructor.
 	 * 
 	 * @param name
 	 * @param color
@@ -62,8 +63,8 @@ public class MapTeam {
 	 * @param max
 	 */
 	public MapTeam(String name, ChatColor color, Integer max) {
-	        this.name = name;
-	        this.color = color;
+		this.name = name;
+		this.color = color;
 		maxPlayers = max;
 		maxOverfill = (Integer) Math.round((float) ((0.25 * max) * 100)) + max;
 	}
@@ -86,15 +87,14 @@ public class MapTeam {
 		return color;
 	}
 
-    /**
-     * Sets the name of the team. Useful to rename teams with a command.
-     *
-     * @set string with team name
-     */
-
-    public void setName(String name) {
-        n = name;
-    }
+	/**
+	 * Sets the name of the team. Useful to rename teams with a command.
+	 * 
+	 * @set string with team name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Returns the maximum amount of players that can join the team.
