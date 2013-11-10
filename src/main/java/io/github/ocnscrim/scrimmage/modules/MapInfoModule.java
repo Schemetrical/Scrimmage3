@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -48,14 +48,14 @@ import org.w3c.dom.NodeList;
  */
 public class MapInfoModule extends Module {
 
-	MapProtocol mproto;
-	String mn;
-	String mv;
-	String mo;
-	List<MapAuthor> ma;
-    Difficulty dif;
-    int mh;
-    World.Environment dim;
+	private MapProtocol mapProto;
+	private String mapName;
+	private String mapVersion;
+	private String mapObjective;
+	private List<MapAuthor> mapAuthors;
+	private Difficulty difficulty;
+	private int maxbuildheigth;
+	private World.Environment dimension; //Not used
 
 	/**
 	 * The basic constructor for MapInfoModule, has no function except to allow
@@ -67,56 +67,56 @@ public class MapInfoModule extends Module {
 	 */
 	public MapInfoModule(Match mat, Map map) {
 		super(mat, map);
-		mproto = new MapProtocol(x.getDoc().getDocumentElement()
+		mapProto = new MapProtocol(document.getDoc().getDocumentElement()
 			.getAttribute("proto"));
-		Node n_name = XMLUtils.getFirstNodeByName(x.getDoc(), "name");
+		Node n_name = XMLUtils.getFirstNodeByName(document.getDoc(), "name");
 		if (n_name != null) {
 			if (n_name.getNodeType() == Node.ELEMENT_NODE) {
 				Element e_name = (Element) n_name;
-				mn = e_name.getTextContent();
+				mapName = e_name.getTextContent();
 			}
 
 		}
-		Node n_ver = XMLUtils.getFirstNodeByName(x.getDoc(), "version");
+		Node n_ver = XMLUtils.getFirstNodeByName(document.getDoc(), "version");
 		if (n_ver != null) {
 			if (n_ver.getNodeType() == Node.ELEMENT_NODE) {
 				Element e_ver = (Element) n_ver;
-				mv = e_ver.getTextContent();
+				mapVersion = e_ver.getTextContent();
 			}
 
 		}
-		Node n_obj = XMLUtils.getFirstNodeByName(x.getDoc(), "objective");
+		Node n_obj = XMLUtils.getFirstNodeByName(document.getDoc(), "objective");
         if (n_obj != null) {
             if (n_obj.getNodeType() == Node.ELEMENT_NODE) {
                 Element e_obj = (Element) n_obj;
-                mo = e_obj.getTextContent();
+                mapObjective = e_obj.getTextContent();
             }
 
         }
-        Node n_dif = XMLUtils.getFirstNodeByName(x.getDoc(), "difficulty");
+        Node n_dif = XMLUtils.getFirstNodeByName(document.getDoc(), "difficulty");
         if (n_dif != null) {
             if (n_dif.getNodeType() == Node.ELEMENT_NODE) {
                 Element e_dif = (Element) n_obj;
-                dif = Difficulty.getByValue(Integer.parseInt(e_dif.getTextContent()));
+                difficulty = Difficulty.getByValue(Integer.parseInt(e_dif.getTextContent()));
             }
         }
-        Node n_dim = XMLUtils.getFirstNodeByName(x.getDoc(), "dimension");
+        Node n_dim = XMLUtils.getFirstNodeByName(document.getDoc(), "dimension");
         if (n_dim != null) {
             if (n_dim.getNodeType() == Node.ELEMENT_NODE) {
                 Element e_dim = (Element) n_obj;
-                dim = World.Environment.valueOf(e_dim.getTextContent().toUpperCase());
+                dimension = World.Environment.valueOf(e_dim.getTextContent().toUpperCase());
             }
         }
-        Node n_max = XMLUtils.getFirstNodeByName(x.getDoc(), "maxbuildheight");
+        Node n_max = XMLUtils.getFirstNodeByName(document.getDoc(), "maxbuildheight");
         if (n_max != null) {
             if (n_max.getNodeType() == Node.ELEMENT_NODE) {
                 Element e_max = (Element) n_obj;
-                mh = Integer.parseInt(e_max.getTextContent());
+                maxbuildheigth = Integer.parseInt(e_max.getTextContent());
             }
         }
-		ma = new ArrayList<MapAuthor>();
-		Node n_aut = XMLUtils.getFirstNodeByName(x.getDoc(), "authors");
-		Node n_con = XMLUtils.getFirstNodeByName(x.getDoc(), "contributors");
+		mapAuthors = new ArrayList<MapAuthor>();
+		Node n_aut = XMLUtils.getFirstNodeByName(document.getDoc(), "authors");
+		Node n_con = XMLUtils.getFirstNodeByName(document.getDoc(), "contributors");
 		if (n_aut != null) {
 			if (n_aut.getNodeType() == Node.ELEMENT_NODE) {
 				Element e_aut = (Element) n_aut;
@@ -127,7 +127,7 @@ public class MapInfoModule extends Module {
 						Element e_aut_child = (Element) n_aut_child;
 						String authname = e_aut_child.getTextContent();
 						String authcontrib = e_aut_child.getAttribute("contribution");
-						ma.add(new MapAuthor(MapAuthorType.AUTHOR, authname, authcontrib));
+						mapAuthors.add(new MapAuthor(MapAuthorType.AUTHOR, authname, authcontrib));
 					}
 				}
 			}
@@ -142,7 +142,7 @@ public class MapInfoModule extends Module {
 						Element e_con_child = (Element) n_con_child;
 						String authname = e_con_child.getTextContent();
 						String authcontrib = e_con_child.getAttribute("contribution");
-						ma.add(new MapAuthor(MapAuthorType.CONTRIBUTOR, authname, authcontrib));
+						mapAuthors.add(new MapAuthor(MapAuthorType.CONTRIBUTOR, authname, authcontrib));
 					}
 				}
 			}
@@ -156,17 +156,17 @@ public class MapInfoModule extends Module {
 	 * @see MapProtocol
 	 */
 	public MapProtocol getMapProto() {
-		return mproto;
+		return mapProto;
 	}
 
 	/**
-	 * Returns the map name specific in the XML as a string. Returns null if
+	 * Returns the map name specific in the XML as amplifier string. Returns null if
 	 * there is no such node or if the node is not an element.
 	 *
 	 * @return map name string according to XML
 	 */
 	public String getMapName() {
-		return mn;
+		return mapName;
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class MapInfoModule extends Module {
 	 * @return map version string according to XML
 	 */
 	public String getMapVersion() {
-		return mv;
+		return mapVersion;
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class MapInfoModule extends Module {
 	 * @return map objective string according to XML
 	 */
 	public String getMapObjective() {
-		return mo;
+		return mapObjective;
 	}
 
 	/**
@@ -198,25 +198,25 @@ public class MapInfoModule extends Module {
 	 * @see MapAuthor
 	 */
 	public List<MapAuthor> getMapAuthors() {
-		return ma;
+		return mapAuthors;
 	}
 
     /**
-     * Returns max build height of a map
+     * Returns max build height of amplifier map
      *
      * @return int max height
      */
     public int getMaxBuildHeight() {
-        return mh;
+        return maxbuildheigth;
     }
 
     /**
-     * Returns Minecraft difficulty of the map's world
+     * Returns Minecraft difficulty of the map'slot world
      *
      * @return Difficulty
      */
     public Difficulty getDifficulty() {
-        return dif;
+        return difficulty;
     }
 
 }

@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Jake0oo0.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -33,7 +33,7 @@ import org.w3c.dom.Node;
  * Module for managing match time
  */
 public class TimeModule extends Module {
-    int l;
+    private int length;
 
     /**
      * Default constructor using superclass Module constructor
@@ -43,9 +43,9 @@ public class TimeModule extends Module {
      */
     public TimeModule(Match mat, Map map) {
         super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "time");
+        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "time");
         if (n != null) {
-            l = TimeUtils.parseTimeStringIntoSecs(n.getTextContent());
+            length = TimeUtils.parseTimeStringIntoSecs(n.getTextContent());
         }
     }
 
@@ -55,6 +55,6 @@ public class TimeModule extends Module {
      * @return int match length
      */
     public int getMatchLength() {
-        return l;
+        return length;
     }
 }

@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -26,20 +26,20 @@ package io.github.ocnscrim.scrimmage.map;
 import org.bukkit.ChatColor;
 
 /**
- * Class serving to store information regarding a team, such as player count,
+ * Class serving to store information regarding amplifier team, such as player count,
  * color and name.
  * 
  * @author Maxim Salikhov
  */
 public class MapTeam {
 
-	String n;
-	ChatColor c;
-	Integer m;
-	Integer o;
+	private String name;
+	private ChatColor color;
+	private Integer maxPlayers;
+	private Integer maxOverfill;
 
 	/**
-	 * Basic constructor for a MapTeam, getting all parameters from constructor.
+	 * Basic constructor for amplifier MapTeam, getting all parameters from constructor.
 	 * 
 	 * @param name
 	 * @param color
@@ -47,10 +47,10 @@ public class MapTeam {
 	 * @param overfill
 	 */
 	public MapTeam(String name, ChatColor color, Integer max, Integer overfill) {
-		n = name;
-		c = color;
-		m = max;
-		o = overfill;
+		this.name = name;
+		this.color = color;
+		this.maxPlayers = max;
+		this.maxOverfill = overfill;
 	}
 
 	/**
@@ -62,10 +62,10 @@ public class MapTeam {
 	 * @param max
 	 */
 	public MapTeam(String name, ChatColor color, Integer max) {
-		n = name;
-		c = color;
-		m = max;
-		o = (Integer) Math.round((float) ((0.25 * max) * 100)) + max;
+	        this.name = name;
+	        this.color = color;
+		maxPlayers = max;
+		maxOverfill = (Integer) Math.round((float) ((0.25 * max) * 100)) + max;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class MapTeam {
 	 * @return string with team name
 	 */
 	public String getName() {
-		return n;
+		return name;
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class MapTeam {
 	 * @return ChatColor of the team
 	 */
 	public ChatColor getColor() {
-		return c;
+		return color;
 	}
 
 	/**
@@ -92,17 +92,17 @@ public class MapTeam {
 	 * @return integer with max players on team
 	 */
 	public Integer getMax() {
-		return m;
+		return maxPlayers;
 	}
 
 	/**
 	 * Returns the overfill amount of players that can join the team. This is
-	 * the absolute limit for joining a team.
+	 * the absolute limit for joining amplifier team.
 	 * 
 	 * @return integer with overfill players on team
 	 */
 	public Integer getOverfill() {
-		return o;
+		return maxOverfill;
 	}
 
 }

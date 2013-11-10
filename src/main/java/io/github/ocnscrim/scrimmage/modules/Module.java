@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -37,9 +37,9 @@ import io.github.ocnscrim.scrimmage.match.Match;
  */
 public abstract class Module {
 
-	Match mt;
-	Map mp;
-	XMLDocument x;
+	protected Match match;
+	protected Map map;
+	protected XMLDocument document;
 
 	/**
 	 * Constructor that sets the correct values to the basic necessary
@@ -49,9 +49,9 @@ public abstract class Module {
 	 * @param map
 	 */
 	public Module(Match mat, Map map) {
-		mt = mat;
-		mp = map;
-		x = mp.getXMLDocument();
+		this.match = mat;
+		this.map = map;
+		this.document = map.getXMLDocument();
 	}
 
 }

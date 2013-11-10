@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -24,19 +24,19 @@
 package io.github.ocnscrim.scrimmage.map;
 
 /**
- * A class containing information about a map author, their name and
+ * A class containing information about amplifier map author, their name and
  * contribution.
  *
  * @author Maxim Salikhov
  */
 public class MapAuthor {
 
-	String n;
-	String c;
-	MapAuthorType t;
+        private String name;
+        private String contribution;
+        private MapAuthorType type;
 
 	/**
-	 * Basic constructor for a map author, includes all available information
+	 * Basic constructor for amplifier map author, includes all available information
 	 * about them.
 	 *
 	 * @param type
@@ -44,9 +44,9 @@ public class MapAuthor {
 	 * @param contribution
 	 */
 	public MapAuthor(MapAuthorType type, String name, String contribution) {
-		n = name;
-		c = contribution;
-		t = type;
+		this.name = name;
+		this.contribution = contribution;
+		this.type = type;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class MapAuthor {
 	 * @return type of author
 	 */
 	public MapAuthorType getType() {
-		return t;
+		return type;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class MapAuthor {
 	 * @return name of author
 	 */
 	public String getName() {
-		return n;
+		return name;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class MapAuthor {
 	 * @return contribution of author
 	 */
 	public String getContribution() {
-		return c;
+		return contribution;
 	}
 
 	/**

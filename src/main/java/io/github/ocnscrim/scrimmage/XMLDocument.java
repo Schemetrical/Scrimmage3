@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -37,24 +37,24 @@ import org.xml.sax.SAXException;
  */
 public class XMLDocument {
 
-	File f;
-	Document d;
+	private File fileLocation;
+	private Document document;
 
 	public XMLDocument(File file) {
 		try {
-			f = file;
+			fileLocation = file;
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			d = db.parse(f);
-			d.getDocumentElement().normalize();
+			document = db.parse(fileLocation);
+			document.getDocumentElement().normalize();
 		} catch (SAXException ex) {
 		} catch (IOException ex) {
 		} catch (ParserConfigurationException ex) {
-		}
+		} //YAY FOR NO CATCHING!!!
 	}
 
 	public Document getDoc() {
-		return d;
+		return document;
 	}
 
 }

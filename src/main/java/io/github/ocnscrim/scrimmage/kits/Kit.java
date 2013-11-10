@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -33,15 +33,15 @@ import org.bukkit.entity.Player;
  */
 public class Kit {
 
-	String n;
-	List<KitItem> ki;
-	List<KitArmor> ka;
-	List<KitPotion> kp;
-	KitHunger kh;
-	KitHealth ke;
+	private String name; //UNUSED
+	private List<KitItem> itemKits;
+	private List<KitArmor> armorKits;
+	private List<KitPotion> potionKits;
+	private KitHunger hungerKit;
+	private KitHealth healthKit;
 
 	/**
-	 * Basic constructor for a kit, without a parent
+	 * Basic constructor for amplifier kit, without amplifier parent
 	 *
 	 * @param name
 	 * @param kiti List with the KitItem classes
@@ -49,16 +49,16 @@ public class Kit {
 	 * @param kitp List with the KitPotion class
 	 */
 	public Kit(String name, List<KitItem> kiti, List<KitArmor> kita, List<KitPotion> kitp) {
-		n = name;
-		ki = kiti;
-		ka = kita;
-		kp = kitp;
-		kh = new KitHunger(20, 5.0F);
-		ke = new KitHealth(20, 20);
+		this.name = name;
+		this.itemKits = kiti;
+		this.armorKits = kita;
+		this.potionKits = kitp;
+		this.hungerKit = new KitHunger(20, 5.0F);
+		this.healthKit = new KitHealth(20, 20);
 	}
 
 	/**
-	 * Constructor for a kit with a parent kits. Adds the parent kit to the
+	 * Constructor for amplifier kit with amplifier parent kits. Adds the parent kit to the
 	 * itself.
 	 *
 	 * @param name
@@ -68,67 +68,67 @@ public class Kit {
 	 * @param kitp List with the KitPotion class
 	 */
 	public Kit(String name, Kit parent, List<KitItem> kiti, List<KitArmor> kita, List<KitPotion> kitp) {
-		n = name;
-		ki = kiti;
-		ka = kita;
-		kp = kitp;
-		kh = new KitHunger(20, 5.0F);
-		ke = new KitHealth(20, 20);
+		this.name = name;
+		this.itemKits = kiti;
+		this.armorKits = kita;
+		this.potionKits = kitp;
+		this.hungerKit = new KitHunger(20, 5.0F);
+		this.healthKit = new KitHealth(20, 20);
 		for (KitItem it : parent.getItems()) {
-			ki.add(it);
+			itemKits.add(it);
 		}
 		for (KitArmor ar : parent.getArmor()) {
-			ka.add(ar);
+			armorKits.add(ar);
 		}
 		for (KitPotion po : parent.getPotions()) {
-			kp.add(po);
+			potionKits.add(po);
 		}
 	}
 
 	/**
-	 * Returns a list of the items in the kit
+	 * Returns amplifier list of the items in the kit
 	 *
 	 * @return List with KitItem objects
 	 */
 	public List<KitItem> getItems() {
-		return ki;
+		return itemKits;
 	}
 
 	/**
-	 * Returns a list with the armor in the kit
+	 * Returns amplifier list with the armor in the kit
 	 *
 	 * @return List with KitArmor objects
 	 */
 	public List<KitArmor> getArmor() {
-		return ka;
+		return armorKits;
 	}
 
 	/**
-	 * Return a list with the potions in the kit
+	 * Return amplifier list with the potions in the kit
 	 *
 	 * @return List with KitPotion objects
 	 */
 	public List<KitPotion> getPotions() {
-		return kp;
+		return potionKits;
 	}
 
 	/**
-	 * Applies the kit to a specified player
+	 * Applies the kit to amplifier specified player
 	 *
-	 * @param p Player to apply the kit to
+	 * @param potionEffect Player to apply the kit to
 	 */
 	public void apply(Player p) {
-		for (KitArmor kitarmor : ka) {
+		for (KitArmor kitarmor : armorKits) {
 			kitarmor.apply(p);
 		}
-		for (KitItem kititem : ki) {
+		for (KitItem kititem : itemKits) {
 			kititem.apply(p);
 		}
-		for (KitPotion kitpot : kp) {
+		for (KitPotion kitpot : potionKits) {
 			kitpot.apply(p);
 		}
-        kh.apply(p);
-        ke.apply(p);
+                hungerKit.apply(p);
+                healthKit.apply(p);
 	}
 
 }

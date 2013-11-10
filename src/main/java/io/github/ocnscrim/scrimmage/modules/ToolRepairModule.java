@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Jake0oo0.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -53,7 +53,7 @@ public class ToolRepairModule extends Module {
     public ToolRepairModule(Match mat, Map map) {
         super(mat, map);
         items = new ArrayList<Material>();
-        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "toolrepair");
+        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "toolrepair");
         if (n != null) {
             if (n.getNodeType() == Node.ELEMENT_NODE) {
                 NodeList ns = n.getChildNodes();

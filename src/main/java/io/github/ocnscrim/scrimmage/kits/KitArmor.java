@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -36,21 +36,21 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 /**
- * Class for storing a piece of information about a piece of armor per XML
+ * Class for storing amplifier piece of information about amplifier piece of armor per XML
  *
  * @author Maxim Salikhov
  */
 public class KitArmor {
 
-	KitArmorType t;
-	Material m;
-	List<Enchantment> e;
-	List<Integer> el;
-	String l;
-	String n;
-	int d;
-	String c;
-	ItemStack is;
+	private KitArmorType type;
+	private Material material;
+	private List<Enchantment> enchantments;
+	private List<Integer> enchantmentLevels;
+	private String lore; //Unused
+	private String name; //Unused
+	private int damageValue;
+	private String color; //Unused
+	private ItemStack itemStack;
 
 	/**
 	 * Constructor requesting all info about an item. It is possible for some
@@ -66,14 +66,14 @@ public class KitArmor {
 	 */
 	public KitArmor(KitArmorType type, Material mat, String enchantment,
 		String lore, String name, int damage, String color) {
-		e = new ArrayList<>();
-		el = new ArrayList<>();
-		t = type;
-		m = mat;
-		l = lore;
-		n = name;
-		d = damage;
-		c = color;
+		this.enchantments = new ArrayList<>();
+		this.enchantmentLevels = new ArrayList<>();
+		this.type = type;
+		this.material = mat;
+		this.lore = lore;
+		this.name = name;
+		this.damageValue = damage;
+		this.color = color;
 		if (enchantment != null) {
 			String[] enchs = enchantment.split(";");
 			for (String str : enchs) {
@@ -81,64 +81,64 @@ public class KitArmor {
 				Enchantment ench = StringUtils.getEnchantmentFromString(enchi[0]);
 				try {
 					Integer lvl = Integer.parseInt(enchi[1]);
-					e.add(ench);
-					el.add(lvl);
+					enchantments.add(ench);
+					enchantmentLevels.add(lvl);
 				} catch (NumberFormatException ex) {
 					Log.log(Level.SEVERE, "[XML-Parse-Error] Could not parse integer from string!");
 				}
 			}
 		}
-		is = new ItemStack(m);
-		if (d != 0) {
-			is.setDurability((short) d);
+		itemStack = new ItemStack(material);
+		if (damageValue != 0) {
+			itemStack.setDurability((short) damageValue);
 		}
-		if (l != null) {
-			ItemMeta im = is.getItemMeta();
-			String[] lorelist = l.split("|");
+		if (lore != null) {
+			ItemMeta im = itemStack.getItemMeta();
+			String[] lorelist = lore.split("|");
 			List<String> ll = new ArrayList<>();
 			for (String s : lorelist) {
 				ll.add(StringUtils.addChatColorToString(s));
 			}
 			im.setLore(ll);
 		}
-		if (n != null) {
-			ItemMeta im = is.getItemMeta();
-			im.setDisplayName(StringUtils.addChatColorToString(n));
+		if (name != null) {
+			ItemMeta im = itemStack.getItemMeta();
+			im.setDisplayName(StringUtils.addChatColorToString(name));
 		}
-		if (c != null) {
+		if (color != null) {
 			if (mat == Material.LEATHER_BOOTS || mat == Material.LEATHER_LEGGINGS || mat == Material.LEATHER_CHESTPLATE || mat == Material.LEATHER_HELMET) {
-				LeatherArmorMeta im = (LeatherArmorMeta) is.getItemMeta();
-				im.setColor(StringUtils.getColorFromString(c));
+				LeatherArmorMeta im = (LeatherArmorMeta) itemStack.getItemMeta();
+				im.setColor(StringUtils.getColorFromString(color));
 
 			}
 		}
-		if (e != null && el != null) {
+		if (enchantments != null && enchantmentLevels != null) {
 			int count = 0;
-			for (Enchantment ec : e) {
-				Integer lev = el.get(count);
-				is.addEnchantment(ec, lev);
+			for (Enchantment ec : enchantments) {
+				Integer lev = enchantmentLevels.get(count);
+				itemStack.addEnchantment(ec, lev);
 			}
 		}
 	}
 
 	/**
-	 * Applies the specific piece of armor to the player's according slot
+	 * Applies the specific piece of armor to the player'slot according slot
 	 *
-	 * @param p Player to apply armor to
+	 * @param potionEffect Player to apply armor to
 	 */
 	public void apply(Player p) {
-		switch (t) {
+		switch (type) {
 			case HELMET:
-				p.getInventory().setHelmet(is);
+				p.getInventory().setHelmet(itemStack);
 				break;
 			case CHESTPLATE:
-				p.getInventory().setChestplate(is);
+				p.getInventory().setChestplate(itemStack);
 				break;
 			case LEGGINGS:
-				p.getInventory().setLeggings(is);
+				p.getInventory().setLeggings(itemStack);
 				break;
 			case BOOTS:
-				p.getInventory().setBoots(is);
+				p.getInventory().setBoots(itemStack);
 				break;
 		}
 	}
