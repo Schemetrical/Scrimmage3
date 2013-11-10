@@ -31,6 +31,8 @@ import io.github.ocnscrim.scrimmage.match.Match;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.bukkit.Difficulty;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -49,6 +51,7 @@ public class MapInfoModule extends Module {
 	String mv;
 	String mo;
 	List<MapAuthor> ma;
+    Difficulty dif;
 
 	/**
 	 * The basic constructor for MapInfoModule, has no function except to allow
@@ -79,13 +82,20 @@ public class MapInfoModule extends Module {
 
 		}
 		Node n_obj = XMLUtils.getFirstNodeByName(x.getDoc(), "objective");
-		if (n_obj != null) {
-			if (n_obj.getNodeType() == Node.ELEMENT_NODE) {
-				Element e_obj = (Element) n_obj;
-				mo = e_obj.getTextContent();
-			}
+        if (n_obj != null) {
+            if (n_obj.getNodeType() == Node.ELEMENT_NODE) {
+                Element e_obj = (Element) n_obj;
+                mo = e_obj.getTextContent();
+            }
 
-		}
+        }
+        Node n_dif = XMLUtils.getFirstNodeByName(x.getDoc(), "difficulty");
+        if (n_dif != null) {
+            if (n_dif.getNodeType() == Node.ELEMENT_NODE) {
+                Element e_dif = (Element) n_obj;
+                dif = Difficulty.getByValue(Integer.parseInt(e_dif.getTextContent()));
+            }
+        }
 		ma = new ArrayList<MapAuthor>();
 		Node n_aut = XMLUtils.getFirstNodeByName(x.getDoc(), "authors");
 		Node n_con = XMLUtils.getFirstNodeByName(x.getDoc(), "contributors");
