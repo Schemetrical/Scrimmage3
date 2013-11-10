@@ -25,15 +25,14 @@ package io.github.ocnscrim.scrimmage.modules;
 
 import io.github.ocnscrim.scrimmage.map.Map;
 import io.github.ocnscrim.scrimmage.match.Match;
-import io.github.ocnscrim.scrimmage.utils.TimeUtils;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
 import org.w3c.dom.Node;
 
 /**
- * Module for managing match time
+ * Class for managing trading with villagers
  */
-public class TimeModule extends Module {
-    int l;
+public class VillagerModule extends Module {
+    boolean multi;
 
     /**
      * Default constructor using superclass Module constructor
@@ -41,20 +40,22 @@ public class TimeModule extends Module {
      * @param mat
      * @param map
      */
-    public TimeModule(Match mat, Map map) {
+    public VillagerModule(Match mat, Map map) {
         super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "time");
+        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "multitrade");
+        multi = false;
         if (n != null) {
-            l = TimeUtils.parseTimeStringIntoSecs(n.getTextContent());
+            multi = true;
         }
     }
 
     /**
-     * Returns match length in seconds
+     * Returns boolean allowing multiple players to trade
+     * with villagers
      *
-     * @return int match length
+     * @return boolean allowing multiple traders at once
      */
-    public int getMatchLength() {
-        return l;
+    public boolean isMulti() {
+        return multi;
     }
 }

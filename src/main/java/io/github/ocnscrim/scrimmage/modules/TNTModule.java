@@ -49,6 +49,8 @@ public class TNTModule extends Module {
      */
     public TNTModule(Match mat, Map map) {
         super(mat, map);
+        insta = false;
+        blockDamage= true;
         Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "tnt");
         if (n != null) {
             if (n.getNodeType() == Node.ELEMENT_NODE) {
