@@ -28,7 +28,10 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.CreatureType;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.entity.EntityType;
 
 import java.util.logging.Level;
 
@@ -37,6 +40,7 @@ import java.util.logging.Level;
  * 
  * @author Maxim Salikhov
  */
+@SuppressWarnings("deprecation")
 public class StringUtils {
 
 	/**
@@ -136,6 +140,52 @@ public class StringUtils {
             }
         }
     }
-
-
+	
+	/**
+	 * Returns the CreatureType based on the string that has been put in
+	 * 
+	 * @param s
+	 * @return CreatureType resulting from string
+	 */
+	public static CreatureType getCreatureTypeFromString(String s){
+		s = s.replaceAll(" ", "_").toUpperCase();
+		for(CreatureType creature : CreatureType.values()){
+			if(creature.name().equalsIgnoreCase(s)){
+				return creature;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns the EntityType based on the string that has been put in
+	 * 
+	 * @param s
+	 * @return EntityType resulting from string
+	 */
+	public static EntityType getEntityTypeFromString(String s){
+		s = s.replaceAll(" ", "_").toUpperCase();
+		for(EntityType entity : EntityType.values()){
+			if(entity.name().equalsIgnoreCase(s)){
+				return entity;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns if the string put in is a valid mob spawning reason
+	 * 
+	 * @param s
+	 * @return if the string is a valid mob spawning reason.
+	 */
+	public static boolean validSpawnReason(String s){
+		s = s.replaceAll(" ", "_").toUpperCase();
+		for(SpawnReason reason : SpawnReason.values()){
+			if(reason.name().equalsIgnoreCase(s)){
+				return true;
+			}
+		}
+		return false;
+	}
 }
