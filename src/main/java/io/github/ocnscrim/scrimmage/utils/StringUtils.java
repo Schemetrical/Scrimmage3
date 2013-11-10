@@ -131,15 +131,6 @@ public class StringUtils {
 
 		return false;
 	}
-
-    public static EntityType getEntityTypeFromString(String s) {
-        String mod = s.replaceAll("", "_").toUpperCase();
-        for (EntityType type : EntityType.values()) {
-            if (type.name().equalsIgnoreCase(mod)) {
-                return type;
-            }
-        }
-    }
 	
 	/**
 	 * Returns the CreatureType based on the string that has been put in
