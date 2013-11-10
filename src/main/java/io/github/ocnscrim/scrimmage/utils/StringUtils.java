@@ -117,67 +117,56 @@ public class StringUtils {
 	 * @return Boolean created from on/off
 	 */
 	public static boolean parseBoolean(String s) {
-		switch (s) {
-			case "on" :
-				return true;
-			case "yes" :
-				return true;
-			case "true" :
-				return true;
-			case "off" :
-				return false;
-			case "no" :
-				return false;
-			case "false" :
-				return false;
-            default :
-                Log.log(Level.WARNING, "Failed to parse boolean:" + s);
-                return false;
+		if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")) return true;
+		else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")) return false;
+		else {
+			Log.log(Level.WARNING, "Failed to parse boolean:" + s);
+			return false;
 		}
 	}
-	
+
 	/**
 	 * Returns the CreatureType based on the string that has been put in
 	 * 
 	 * @param s
 	 * @return CreatureType resulting from string
 	 */
-	public static CreatureType getCreatureTypeFromString(String s){
+	public static CreatureType getCreatureTypeFromString(String s) {
 		s = s.replaceAll(" ", "_").toUpperCase();
-		for(CreatureType creature : CreatureType.values()){
-			if(creature.name().equalsIgnoreCase(s)){
+		for (CreatureType creature : CreatureType.values()) {
+			if (creature.name().equalsIgnoreCase(s)) {
 				return creature;
 			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns the EntityType based on the string that has been put in
 	 * 
 	 * @param s
 	 * @return EntityType resulting from string
 	 */
-	public static EntityType getEntityTypeFromString(String s){
+	public static EntityType getEntityTypeFromString(String s) {
 		s = s.replaceAll(" ", "_").toUpperCase();
-		for(EntityType entity : EntityType.values()){
-			if(entity.name().equalsIgnoreCase(s)){
+		for (EntityType entity : EntityType.values()) {
+			if (entity.name().equalsIgnoreCase(s)) {
 				return entity;
 			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns if the string put in is a valid mob spawning reason
 	 * 
 	 * @param s
 	 * @return if the string is a valid mob spawning reason.
 	 */
-	public static boolean validSpawnReason(String s){
+	public static boolean validSpawnReason(String s) {
 		s = s.replaceAll(" ", "_").toUpperCase();
-		for(SpawnReason reason : SpawnReason.values()){
-			if(reason.name().equalsIgnoreCase(s)){
+		for (SpawnReason reason : SpawnReason.values()) {
+			if (reason.name().equalsIgnoreCase(s)) {
 				return true;
 			}
 		}
