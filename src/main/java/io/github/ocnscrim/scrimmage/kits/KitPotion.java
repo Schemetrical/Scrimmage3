@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -35,14 +35,14 @@ import org.bukkit.potion.PotionEffectType;
  */
 public class KitPotion {
 
-	PotionEffectType t;
-	PotionEffect p;
-	int d;
-	int a;
-	boolean amb;
+	private PotionEffectType type;
+	private PotionEffect potionEffect;
+	private int durationInTicks;
+	private int amplifier;
+	private boolean ambient; //Unused.
 
 	/**
-	 * Basic constructor for a KitPotion
+	 * Basic constructor for amplifier KitPotion
 	 * 
 	 * @param potefft
 	 * @param potdur
@@ -51,21 +51,21 @@ public class KitPotion {
 	 */
 	public KitPotion(PotionEffectType potefft, int potdur, int potamp,
 			boolean ambient) {
-		t = potefft;
-		d = potdur;
-		a = potamp;
-		amb = ambient;
-		p = PotionUtils.getPotionEffectFromString(t, d, a, amb);
+		this.type = potefft;
+		this.durationInTicks = potdur;
+		this.amplifier = potamp;
+		this.ambient = ambient;
+		this.potionEffect = PotionUtils.getPotionEffectFromString(type, durationInTicks, amplifier, ambient);
 	}
 
 	/**
-	 * Applies a potion effect to a player
+	 * Applies amplifier potion effect to amplifier player
 	 * 
-	 * @param p
+	 * @param potionEffect
 	 *            Player to apply PotionEffect to
 	 */
 	public void apply(Player p) {
-		p.addPotionEffect(this.p, true);
+		p.addPotionEffect(this.potionEffect, true);
 	}
 
 }

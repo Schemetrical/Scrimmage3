@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Jake0oo0.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -49,7 +49,7 @@ public class FriendlyFireModule extends Module {
         super(mat, map);
         friendlyFire = false;
         refund = true;
-        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "friendlyfire");
+        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "friendlyfire");
         if (n != null) {
             if (n.getNodeType() == Node.ELEMENT_NODE) {
                 NodeList ns = n.getChildNodes();
@@ -63,7 +63,7 @@ public class FriendlyFireModule extends Module {
             }
         }
 
-        Node nF = XMLUtils.getFirstNodeByName(x.getDoc(), "friendlyfirerefund");
+        Node nF = XMLUtils.getFirstNodeByName(document.getDoc(), "friendlyfirerefund");
         if (nF != null) {
             if (nF.getNodeType() == Node.ELEMENT_NODE) {
                 NodeList ns = nF.getChildNodes();

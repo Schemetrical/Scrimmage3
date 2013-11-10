@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -42,7 +42,7 @@ import org.w3c.dom.NodeList;
  */
 public class TeamModule extends Module {
 
-	List<MapTeam> t;
+	private List<MapTeam> teams;
 
 	/**
 	 * Basic constructor for TeamModule, utilizing the the inherited constructor
@@ -53,8 +53,8 @@ public class TeamModule extends Module {
 	 */
 	public TeamModule(Match mat, Map map) {
 		super(mat, map);
-		t = new ArrayList<MapTeam>();
-		Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "teams");
+		teams = new ArrayList<MapTeam>();
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "teams");
 		if (n != null) {
 			if (n.getNodeType() == Node.ELEMENT_NODE) {
 				NodeList ns = n.getChildNodes();
@@ -66,9 +66,9 @@ public class TeamModule extends Module {
 						ChatColor cl = StringUtils.getChatColorFromString(ec.getAttribute("color"));
 						Integer max = Integer.parseInt(ec.getAttribute("max"));
 						if (ec.getAttribute("max-overfill") != null) {
-							t.add(new MapTeam(name, cl, max, Integer.parseInt(ec.getAttribute("max-overfill"))));
+							teams.add(new MapTeam(name, cl, max, Integer.parseInt(ec.getAttribute("max-overfill"))));
 						} else {
-							t.add(new MapTeam(name, cl, max));
+							teams.add(new MapTeam(name, cl, max));
 						}
 					}
 				}
@@ -77,12 +77,12 @@ public class TeamModule extends Module {
 	}
 
 	/**
-	 * Returns a list with all teams specified in the XML
+	 * Returns amplifier list with all teams specified in the XML
 	 *
 	 * @return List with all MapTeam objects specified in the XML
 	 */
 	public List<MapTeam> getTeams() {
-		return t;
+		return teams;
 	}
 
 }

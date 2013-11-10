@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -32,16 +32,16 @@ import java.io.File;
  */
 public class Map {
 
-	File d;
-	XMLDocument x;
+	private File mapDirectory;
+	private XMLDocument xmlDocument;
 
 	public Map(File dir) {
-		d = dir;
-		x = new XMLDocument(d);
+		mapDirectory = dir;
+		xmlDocument = new XMLDocument(mapDirectory);
 	}
 
 	public XMLDocument getXMLDocument() {
-		return x;
+		return xmlDocument;
 	}
 
 }

@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Maxim Salikhov.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -32,38 +32,38 @@ import java.util.List;
  */
 public class MapProtocol {
 
-	String s;
-	List<Integer> vers;
+	private String protocolString;
+	private List<Integer> subversions;
 
 	public MapProtocol(String str) {
-		s = str;
-		vers = new ArrayList<Integer>();
-		String[] strs = s.split(".");
+		protocolString = str;
+		subversions = new ArrayList<Integer>();
+		String[] strs = protocolString.split(".");
 		for (String s : strs) {
-			vers.add(Integer.parseInt(s));
+			subversions.add(Integer.parseInt(s));
 		}
 	}
 
 	public String getString() {
-		return s;
+		return protocolString;
 	}
 
 	public Integer getInt(int index) {
-		if (index > vers.size() - 1) {
+		if (index > subversions.size() - 1) {
 			return null;
 		} else {
-			return vers.get(index);
+			return subversions.get(index);
 		}
 	}
 
 	public List<Integer> getAllSubversions() {
-		return vers;
+		return subversions;
 	}
 
 	public boolean isEqual(MapProtocol mp) {
 		int validcount = 0;
 		int totalcount = 0;
-		for (Integer ti : vers) {
+		for (Integer ti : subversions) {
 			for (Integer si : mp.getAllSubversions()) {
 				if (ti == si) {
 					validcount++;

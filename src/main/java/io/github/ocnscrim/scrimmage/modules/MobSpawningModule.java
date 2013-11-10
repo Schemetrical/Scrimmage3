@@ -30,7 +30,7 @@ public class MobSpawningModule extends Module{
     public MobSpawningModule(Match mat, Map map) {
         super(mat, map);
         
-        Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "mobs");
+        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "mobs");
         if (n != null) {
         	if (n.getNodeType() == Node.ELEMENT_NODE) {
 				NodeList ns = n.getChildNodes();
