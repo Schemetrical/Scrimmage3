@@ -127,6 +127,8 @@ public class Kit {
 		for (KitPotion kitpot : kp) {
 			kitpot.apply(p);
 		}
+        kh.apply(p);
+        ke.apply(p);
 	}
 
 }
