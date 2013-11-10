@@ -64,7 +64,7 @@ public class TNTModule extends Module {
                             case "instantignite":
                                 insta = StringUtils.parseBoolean(e.getTextContent());
                                 break;
-                            case "blockdamaage":
+                            case "blockdamage":
                                 blockDamage = StringUtils.parseBoolean(e.getTextContent());
                                 break;
                         }
