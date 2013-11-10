@@ -1,0 +1,5 @@
+name: Scrimmage3
+authors: [msalihov, Jake0oo0, TheAtro, RainoBoy97]
+description: Scrimmage plugin created for Overcast Network scrimmaging
+version: ${project.version}
+website: https://github.com/OCNScrim/Scrimmage3
