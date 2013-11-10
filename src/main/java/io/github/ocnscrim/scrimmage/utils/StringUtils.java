@@ -30,6 +30,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+import java.util.logging.Level;
+
 /**
  * Class with some string utilities
  * 
@@ -109,7 +111,7 @@ public class StringUtils {
 
 	/**
 	 * @param s
-	 * @return Boolean crreated from on/off
+	 * @return Boolean created from on/off
 	 */
 	public static boolean parseBoolean(String s) {
 		switch (s) {
@@ -117,6 +119,10 @@ public class StringUtils {
 				return true;
 			case "off" :
 				return false;
+            case "default" :
+                Log.log(Level.WARNING, "Failed to parse boolean!");
+                return false;
+
 		}
 
 		return false;
