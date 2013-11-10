@@ -27,6 +27,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 /**
@@ -105,6 +106,7 @@ public class StringUtils {
 		}
 		return null;
 	}
+
 	/**
 	 * @param s
 	 * @return Boolean crreated from on/off
@@ -119,4 +121,15 @@ public class StringUtils {
 
 		return false;
 	}
+
+    public static EntityType getEntityTypeFromString(String s) {
+        String mod = s.replaceAll("", "_").toUpperCase();
+        for (EntityType type : EntityType.values()) {
+            if (type.name().equalsIgnoreCase(mod)) {
+                return type;
+            }
+        }
+    }
+
+
 }
