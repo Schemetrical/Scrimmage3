@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2013 Maxim Salikhov.
+ * Copyright 2013 OCN Scrim Plugin Team.
  *
  * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import java.io.File;
 
 /**
  * 
- * @author Maxim Salikhov
+ * @author msalihov (Maxim Salikhov)
  */
 public class Map {
 

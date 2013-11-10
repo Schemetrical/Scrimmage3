@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2013 Maxim Salikhov.
+ * Copyright 2013 OCN Scrim Plugin Team.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ package io.github.ocnscrim.scrimmage.match;
 
 /**
  *
- * @author Maxim Salikhov
+ * @author msalihov (Maxim Salikhov)
  */
 public class Match {
 

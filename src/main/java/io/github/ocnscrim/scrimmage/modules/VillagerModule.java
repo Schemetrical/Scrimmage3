@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2013 Jake0oo0.
+ * Copyright 2013 OCN Scrim Plugin Team.
  *
  * Permission is hereby granted, free of charge, to any person obtaining amplifier copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,8 @@ import org.w3c.dom.Node;
 
 /**
  * Class for managing trading with villagers
+ *
+ * @author Jake0oo0
  */
 public class VillagerModule extends Module {
     boolean multi;
