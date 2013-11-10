@@ -30,6 +30,7 @@ import io.github.ocnscrim.scrimmage.kits.KitItem;
 import io.github.ocnscrim.scrimmage.kits.KitPotion;
 import io.github.ocnscrim.scrimmage.map.Map;
 import io.github.ocnscrim.scrimmage.match.Match;
+import io.github.ocnscrim.scrimmage.utils.Log;
 import io.github.ocnscrim.scrimmage.utils.PotionUtils;
 import io.github.ocnscrim.scrimmage.utils.StringUtils;
 import io.github.ocnscrim.scrimmage.utils.TimeUtils;
@@ -37,6 +38,7 @@ import io.github.ocnscrim.scrimmage.utils.XMLUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import org.bukkit.Material;
 import org.bukkit.potion.PotionEffectType;
 import org.w3c.dom.Element;
@@ -99,44 +101,65 @@ public class KitModule extends Module {
 												ench = ec.getAttribute("enchantment");
 												lore = ec.getAttribute("lore");
 												iname = ec.getAttribute("name");
-												damage = Integer.parseInt(ec.getAttribute("damage"));
-												ki.add(new KitItem(slot, material, ench, lore, iname, damage));
+												try {
+													damage = Integer.parseInt(ec.getAttribute("damage"));
+													ki.add(new KitItem(slot, material, ench, lore, iname, damage));
+												} catch (NumberFormatException ex) {
+													Log.log(Level.SEVERE, "[XML-Parse-Error] Could not parse integer from string!");
+												}
 												break;
 											case "helmet":
 												material = StringUtils.getMaterialFromString(ec.getTextContent());
 												ench = ec.getAttribute("enchantment");
 												lore = ec.getAttribute("lore");
 												iname = ec.getAttribute("name");
-												damage = Integer.parseInt(ec.getAttribute("damage"));
 												color = ec.getAttribute("color");
-												ka.add(new KitArmor(KitArmorType.HELMET, material, ench, lore, iname, damage, color));
+												try {
+													damage = Integer.parseInt(ec.getAttribute("damage"));
+													ka.add(new KitArmor(KitArmorType.HELMET, material, ench, lore, iname, damage, color));
+												} catch (NumberFormatException ex) {
+													Log.log(Level.SEVERE, "[XML-Parse-Error] Could not parse integer from string!");
+												}
 												break;
 											case "chestplate":
 												material = StringUtils.getMaterialFromString(ec.getTextContent());
 												ench = ec.getAttribute("enchantment");
 												lore = ec.getAttribute("lore");
 												iname = ec.getAttribute("name");
-												damage = Integer.parseInt(ec.getAttribute("damage"));
 												color = ec.getAttribute("color");
-												ka.add(new KitArmor(KitArmorType.CHESTPLATE, material, ench, lore, iname, damage, color));
+												try {
+													damage = Integer.parseInt(ec.getAttribute("damage"));
+													ka.add(new KitArmor(KitArmorType.CHESTPLATE, material, ench, lore, iname, damage, color));
+												} catch (NumberFormatException ex) {
+													Log.log(Level.SEVERE, "[XML-Parse-Error] Could not parse integer from string!");
+												}
 												break;
 											case "leggings":
 												material = StringUtils.getMaterialFromString(ec.getTextContent());
 												ench = ec.getAttribute("enchantment");
 												lore = ec.getAttribute("lore");
 												iname = ec.getAttribute("name");
-												damage = Integer.parseInt(ec.getAttribute("damage"));
 												color = ec.getAttribute("color");
-												ka.add(new KitArmor(KitArmorType.LEGGINGS, material, ench, lore, iname, damage, color));
+												try {
+													damage = Integer.parseInt(ec.getAttribute("damage"));
+													ka.add(new KitArmor(KitArmorType.LEGGINGS, material, ench, lore, iname, damage, color));
+												} catch (NumberFormatException ex) {
+													Log.log(Level.SEVERE, "[XML-Parse-Error] Could not parse integer from string!");
+												}
 												break;
 											case "boots":
 												material = StringUtils.getMaterialFromString(ec.getTextContent());
 												ench = ec.getAttribute("enchantment");
 												lore = ec.getAttribute("lore");
 												iname = ec.getAttribute("name");
-												damage = Integer.parseInt(ec.getAttribute("damage"));
 												color = ec.getAttribute("color");
-												ka.add(new KitArmor(KitArmorType.BOOTS, material, ench, lore, iname, damage, color));
+												try {
+													damage = Integer.parseInt(ec.getAttribute("damage"));
+													ka.add(new KitArmor(KitArmorType.BOOTS, material, ench, lore, iname, damage, color));
+												} catch (NumberFormatException ex) {
+													Log.log(Level.SEVERE, "[XML-Parse-Error] Could not parse integer from string!");
+												}
+
 												break;
 											case "potion":
 												poteff = PotionUtils.getPotionEffectTypeFromString(ec.getTextContent());
@@ -154,8 +177,12 @@ public class KitModule extends Module {
 												} else {
 													ambient = false;
 												}
-												potionamp = Integer.parseInt(ec.getAttribute("amplifier"));
-												kp.add(new KitPotion(poteff, potiondur, potionamp, ambient));
+												try {
+													potionamp = Integer.parseInt(ec.getAttribute("amplifier"));
+													kp.add(new KitPotion(poteff, potiondur, potionamp, ambient));
+												} catch (NumberFormatException ex) {
+													Log.log(Level.SEVERE, "[XML-Parse-Error] Could not parse integer from string!");
+												}
 												break;
 										}
 									}
@@ -238,8 +265,8 @@ public class KitModule extends Module {
 														ambient = false;
 													}
 												} else {
-                                                ambient = false;
-                                            }
+													ambient = false;
+												}
 												potionamp = Integer.parseInt(ec.getAttribute("amplifier"));
 												kp.add(new KitPotion(poteff, potiondur, potionamp, ambient));
 												break;

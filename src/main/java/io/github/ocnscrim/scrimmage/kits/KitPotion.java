@@ -24,6 +24,7 @@
 package io.github.ocnscrim.scrimmage.kits;
 
 import io.github.ocnscrim.scrimmage.utils.PotionUtils;
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -40,6 +41,14 @@ public class KitPotion {
 	int a;
 	boolean amb;
 
+	/**
+	 * Basic constructor for a KitPotion
+	 * 
+	 * @param potefft
+	 * @param potdur
+	 * @param potamp
+	 * @param ambient
+	 */
 	public KitPotion(PotionEffectType potefft, int potdur, int potamp,
 			boolean ambient) {
 		t = potefft;
@@ -47,6 +56,16 @@ public class KitPotion {
 		a = potamp;
 		amb = ambient;
 		p = PotionUtils.getPotionEffectFromString(t, d, a, amb);
+	}
+
+	/**
+	 * Applies a potion effect to a player
+	 * 
+	 * @param p
+	 *            Player to apply PotionEffect to
+	 */
+	public void apply(Player p) {
+		p.addPotionEffect(this.p, true);
 	}
 
 }

@@ -24,7 +24,9 @@
 package io.github.ocnscrim.scrimmage.utils;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 /**
@@ -43,6 +45,39 @@ public class StringUtils {
 	public static ChatColor getChatColorFromString(String s) {
 		s = s.replaceAll(" ", "_").toUpperCase();
 		return ChatColor.getByChar(s);
+	}
+
+	/**
+	 * Converts a hexadecimal color string into a Bukkit Color
+	 * 
+	 * @param s
+	 * @return Bukkit Color
+	 */
+	public static Color getColorFromString(String s) {
+		return Color.fromRGB(java.awt.Color.decode(s).getRGB());
+	}
+
+	/**
+	 * Returns enchantment from based on the input string
+	 * 
+	 * @param s
+	 * @return Enchantment based on string
+	 */
+	public static Enchantment getEnchantmentFromString(String s) {
+		s = s.replaceAll(" ", "_").toUpperCase();
+		return Enchantment.getByName(s);
+	}
+
+	/**
+	 * Adds ChatColor to a string
+	 * 
+	 * @param s
+	 * @return String with ChatColor added
+	 */
+	public static String addChatColorToString(String s) {
+		s = ChatColor.translateAlternateColorCodes('`', s);
+		s = ChatColor.translateAlternateColorCodes('§', s);
+		return s;
 	}
 
 	/**
@@ -70,19 +105,18 @@ public class StringUtils {
 		}
 		return null;
 	}
+	/**
+	 * @param s
+	 * @return Boolean crreated from on/off
+	 */
+	public static boolean parseBoolean(String s) {
+		switch (s) {
+			case "on" :
+				return true;
+			case "off" :
+				return false;
+		}
 
-    /**
-     * @param s
-     * @return Boolean created from on/off
-     */
-    public static boolean parseBoolean(String s) {
-        switch (s) {
-            case "on":
-                return true;
-            case "off":
-                return false;
-        }
-
-        return false;
-    }
+		return false;
+	}
 }
