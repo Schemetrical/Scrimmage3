@@ -86,6 +86,16 @@ public class MapTeam {
 		return c;
 	}
 
+    /**
+     * Sets the name of the team. Useful to rename teams with a command.
+     *
+     * @set string with team name
+     */
+
+    public void setName(String name) {
+        n = name;
+    }
+
 	/**
 	 * Returns the maximum amount of players that can join the team.
 	 * 
