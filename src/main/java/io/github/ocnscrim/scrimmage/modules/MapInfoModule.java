@@ -52,6 +52,7 @@ public class MapInfoModule extends Module {
 	String mo;
 	List<MapAuthor> ma;
     Difficulty dif;
+    int mh;
 
 	/**
 	 * The basic constructor for MapInfoModule, has no function except to allow
@@ -94,6 +95,13 @@ public class MapInfoModule extends Module {
             if (n_dif.getNodeType() == Node.ELEMENT_NODE) {
                 Element e_dif = (Element) n_obj;
                 dif = Difficulty.getByValue(Integer.parseInt(e_dif.getTextContent()));
+            }
+        }
+        Node n_max = XMLUtils.getFirstNodeByName(x.getDoc(), "maxbuildheight");
+        if (n_max != null) {
+            if (n_max.getNodeType() == Node.ELEMENT_NODE) {
+                Element e_max = (Element) n_obj;
+                mh = Integer.parseInt(e_max.getTextContent());
             }
         }
 		ma = new ArrayList<MapAuthor>();
@@ -182,5 +190,23 @@ public class MapInfoModule extends Module {
 	public List<MapAuthor> getMapAuthors() {
 		return ma;
 	}
+
+    /**
+     * Returns max build height of a map
+     *
+     * @return int max height
+     */
+    public int getMaxBuildHeight() {
+        return mh;
+    }
+
+    /**
+     * Returns Minecraft difficulty of the map's world
+     *
+     * @return Difficulty
+     */
+    public Difficulty getDifficulty() {
+        return dif;
+    }
 
 }
