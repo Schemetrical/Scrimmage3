@@ -47,6 +47,7 @@ public class HungerModule extends Module {
      */
     public HungerModule(Match mat, Map map) {
         super(mat, map);
+        depletes = true;
         Node n = XMLUtils.getFirstNodeByName(x.getDoc(), "hunger");
         if (n != null) {
             if (n.getNodeType() == Node.ELEMENT_NODE) {
