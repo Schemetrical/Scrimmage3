@@ -82,7 +82,7 @@ public class StringUtils {
 	 */
 	public static String addChatColorToString(String s) {
 		s = ChatColor.translateAlternateColorCodes('`', s);
-		s = ChatColor.translateAlternateColorCodes('ยง', s);
+		s = ChatColor.translateAlternateColorCodes('ง', s);
 		return s;
 	}
 
@@ -120,15 +120,20 @@ public class StringUtils {
 		switch (s) {
 			case "on" :
 				return true;
+			case "yes" :
+				return true;
+			case "true" :
+				return true;
 			case "off" :
 				return false;
-            case "default" :
-                Log.log(Level.WARNING, "Failed to parse boolean!");
+			case "no" :
+				return false;
+			case "false" :
+				return false;
+            default :
+                Log.log(Level.WARNING, "Failed to parse boolean:" + s);
                 return false;
-
 		}
-
-		return false;
 	}
 	
 	/**
