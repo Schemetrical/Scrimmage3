@@ -31,7 +31,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-import org.bukkit.entity.EntityType;
 
 import java.util.logging.Level;
 
