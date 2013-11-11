@@ -3,11 +3,16 @@ Scrimmage3
 
 Version 3 of the Scrimmage Plugin
 
-##Contributing##
+## Contributing
+Please refer to our [contributing guide](https://github.com/OCNScrim/Scrimmage3/blob/master/CONTRIBUTING.md).
 
-When coding, please keep in mind the general idea of the formatting that has been used before you.
-For example, don't name something that was named "Module" a handler in your code. If you can, pelase attach JavaDocs to your
-classes and methods. It is also preffered that you include a copy of the MIT license in each file you commit, but
-we'll add that if nessesary.
-
-
+## Current Contributors
+_GitHub usernames go first, if IGN username is different it is mentioned in parenthesis_
+- msalihov - Project lead
+- Jake0oo0
+- RainoBoy97
+- molenzbwiesel
+- augustt198
+- TheAtro (AtroAtmx)
+- MasterEjay (MasterEjzz)
+- bookofnathan
