@@ -23,6 +23,9 @@
  */
 package io.github.ocnscrim.scrimmage.map;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 
 /**
@@ -37,6 +40,7 @@ public class MapTeam {
 	private final ChatColor color;
 	private final Integer maxPlayers;
 	private final Integer maxOverfill;
+	private List<String> members;
 
 	/**
 	 * Basic constructor for amplifier MapTeam, getting all parameters from
@@ -67,6 +71,7 @@ public class MapTeam {
 		this.color = color;
 		maxPlayers = max;
 		maxOverfill = (Integer) Math.round((float) ((0.25 * max) * 100)) + max;
+		members = new ArrayList<String>();
 	}
 
 	/**
@@ -114,6 +119,30 @@ public class MapTeam {
 	 */
 	public Integer getOverfill() {
 		return maxOverfill;
+	}
+	
+	public boolean containsPlayer(String player){
+		if (members.contains(player)){
+			return true;
+		}
+		return false;
+	}
+	
+	public void addPlayer(String player){
+		if(members.size() >= maxPlayers){
+			return;
+		}
+		if(members.contains(player)){
+			return;
+		}
+		members.add(player);
+	}
+	
+	public void removePlayer(String player){
+		if(!members.contains(player)){
+			return;
+		}
+		members.remove(player);
 	}
 
 }

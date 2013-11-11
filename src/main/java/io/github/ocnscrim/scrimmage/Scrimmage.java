@@ -26,10 +26,15 @@ package io.github.ocnscrim.scrimmage;
 import com.sk89q.bukkit.util.CommandsManagerRegistration;
 import com.sk89q.minecraft.util.commands.*;
 import io.github.ocnscrim.scrimmage.commands.AdminCommands;
+import io.github.ocnscrim.scrimmage.listeners.LoginListener;
+import io.github.ocnscrim.scrimmage.map.MapTeam;
+import io.github.ocnscrim.scrimmage.match.TeamHandler;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.awt.*;
@@ -42,6 +47,7 @@ public class Scrimmage extends JavaPlugin {
 
 	private static Scrimmage _i;
     private CommandsManager<CommandSender> commands;
+    private TeamHandler th;
 	
 	public void onDisable() {
 
@@ -50,6 +56,7 @@ public class Scrimmage extends JavaPlugin {
 	public void onEnable() {
 		Scrimmage._i = this;
         setupCommands();
+        teamInit();
 	}
 	
 	public static Scrimmage get() {
@@ -93,5 +100,16 @@ public class Scrimmage extends JavaPlugin {
 
         return true;
     }
+    
+    public void teamInit(){
+    	MapTeam obs = new MapTeam("Observer", ChatColor.AQUA, 60);
+    	th = new TeamHandler(obs);
+    	PluginManager pm = getServer().getPluginManager();
+    	pm.registerEvents(new LoginListener(this), this);
+    	
+    }
 	
+    public TeamHandler getTeamHandler(){
+    	return th;
+    }
 }
