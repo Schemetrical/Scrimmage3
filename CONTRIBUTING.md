@@ -4,7 +4,7 @@ When coding, please keep in mind the general idea of the formatting that has bee
 
 ## Coding guidelines
 - Use an IDE (ex. Eclipse, NetBeans)
-- Check for null values, so there are not as many `NullPointerException`
+- Check for null values, so there are no `NullPointerException`
 - Use full variable names (ex. `Element childElement`, not `Element c`)
 - Try not to use deprecated methods
 - Use correct indentation
