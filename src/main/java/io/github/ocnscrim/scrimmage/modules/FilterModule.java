@@ -62,8 +62,12 @@ public class FilterModule extends Module {
 						Element childElement = (Element) childNode;
 						if (childElement.getTagName().equals("filter")) {
 							String childElementNameAttr = childElement.getAttribute("name");
-							String childElementParentsAttr = childElement.getAttribute("parents");
-							filterList.add(new Filter(childElement, childElementNameAttr, childElementParentsAttr));
+							if (childElement.hasAttribute("parents")) {
+								String childElementParentsAttr = childElement.getAttribute("parents");
+								filterList.add(new Filter(childElement, childElementNameAttr, childElementParentsAttr));
+							} else {
+								filterList.add(new Filter(childElement, childElementNameAttr));
+							}
 						}
 					}
 				}

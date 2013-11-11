@@ -24,6 +24,7 @@
 package io.github.ocnscrim.scrimmage.filters;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.w3c.dom.Element;
 
@@ -38,8 +39,28 @@ public class Filter {
 	private String thisName;
 	private List<String> thisParentsList;
 
+	/**
+	 * Basic constructor for a filter with parents
+	 *
+	 * @param element
+	 * @param filterName
+	 * @param filterParents
+	 */
 	public Filter(Element element, String filterName, String filterParents) {
 		thisParentsList = new ArrayList<>();
+		thisElement = element;
+		thisName = filterName;
+		String[] parentsStringArray = filterParents.split(" ");
+		thisParentsList.addAll(Arrays.asList(parentsStringArray));
+	}
+
+	/**
+	 * Basic constructor for filter without parents
+	 *
+	 * @param element
+	 * @param filterName
+	 */
+	public Filter(Element element, String filterName) {
 		thisElement = element;
 		thisName = filterName;
 	}
