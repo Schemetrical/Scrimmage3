@@ -98,4 +98,65 @@ public class TimeUtils {
 		return 0;
 	}
 
+	public String formatSeconds(int seconds, String format) {
+		format = format.toLowerCase();
+		int hours = (int) Math.floor(seconds / 3600);
+		int minutes = (int) Math.floor(seconds / 60);
+		if (hours > 0) {
+			String formatted = format.replaceAll("h", "" + hours);
+			minutes = (int) Math.floor(seconds - hours * 3600 / 60);
+			seconds = seconds - hours * 3600 - minutes * 60;
+			if (minutes < 10) {
+				formatted = formatted.replaceAll("m", "0" + minutes);
+				if (seconds < 10) {
+					formatted = formatted.replaceAll("s", "0" + seconds);
+					return formatted;
+				} else {
+					formatted = formatted.replaceAll("s", "" + seconds);
+					return formatted;
+				}
+			} else {
+				formatted = formatted.replaceAll("m", "" + minutes);
+				if (seconds < 10) {
+					formatted = formatted.replaceAll("s", "0" + seconds);
+					return formatted;
+				} else {
+					formatted = formatted.replaceAll("s", "" + seconds);
+					return formatted;
+				}
+			}
+		} else if (minutes > 0) {
+			String formatted = format.replaceAll("h", "0");
+			seconds = seconds - minutes * 60;
+			if (minutes < 10) {
+				formatted = formatted.replaceAll("m", "0" + minutes);
+				if (seconds < 10) {
+					formatted = formatted.replaceAll("s", "0" + seconds);
+					return formatted;
+				} else {
+					formatted = formatted.replaceAll("s", "" + seconds);
+					return formatted;
+				}
+			} else {
+				formatted = formatted.replaceAll("m", "" + minutes);
+				if (seconds < 10) {
+					formatted = formatted.replaceAll("s", "0" + seconds);
+					return formatted;
+				} else {
+					formatted = formatted.replaceAll("s", "" + seconds);
+					return formatted;
+				}
+			}
+		} else {
+			String formatted = format.replaceAll("h", "0");
+			formatted = formatted.replaceAll("m", "00");
+			if (seconds < 10) {
+				formatted = formatted.replaceAll("s", "0" + seconds);
+				return formatted;
+			} else {
+				formatted = formatted.replaceAll("s", "" + seconds);
+				return formatted;
+			}
+		}
+	}
 }
