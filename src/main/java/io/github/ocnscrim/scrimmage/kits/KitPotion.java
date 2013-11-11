@@ -35,11 +35,10 @@ import org.bukkit.potion.PotionEffectType;
  */
 public class KitPotion {
 
-	private PotionEffectType type;
-	private PotionEffect potionEffect;
-	private int durationInTicks;
-	private int amplifier;
-	private boolean ambient; //Unused.
+	private final PotionEffectType type;
+	private final PotionEffect potionEffect;
+	private final int durationInTicks;
+	private final int amplifier;
 
 	/**
 	 * Basic constructor for amplifier KitPotion
@@ -54,14 +53,14 @@ public class KitPotion {
 		this.type = potefft;
 		this.durationInTicks = potdur;
 		this.amplifier = potamp;
-		this.ambient = ambient;
-		this.potionEffect = PotionUtils.getPotionEffectFromString(type, durationInTicks, amplifier, ambient);
+		this.potionEffect = PotionUtils.getPotionEffectFromString(type,
+				durationInTicks, amplifier, ambient);
 	}
 
 	/**
 	 * Applies amplifier potion effect to amplifier player
 	 * 
-	 * @param potionEffect
+	 * @param p
 	 *            Player to apply PotionEffect to
 	 */
 	public void apply(Player p) {

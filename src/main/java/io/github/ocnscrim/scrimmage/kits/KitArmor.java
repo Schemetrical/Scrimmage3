@@ -36,21 +36,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 /**
- * Class for storing amplifier piece of information about amplifier piece of armor per XML
+ * Class for storing amplifier piece of information about amplifier piece of
+ * armor per XML
  *
  * @author msalihov (Maxim Salikhov)
  */
 public class KitArmor {
 
-	private KitArmorType type;
-	private Material material;
-	private List<Enchantment> enchantments;
-	private List<Integer> enchantmentLevels;
-	private String lore; //Unused
-	private String name; //Unused
-	private int damageValue;
-	private String color; //Unused
-	private ItemStack itemStack;
+	private final KitArmorType type;
+	private final Material material;
+	private final List<Enchantment> enchantments;
+	private final List<Integer> enchantmentLevels;
+	private final int damageValue;
+	private final ItemStack itemStack;
+	private final ItemMeta itemMeta;
 
 	/**
 	 * Constructor requesting all info about an item. It is possible for some
@@ -70,10 +69,7 @@ public class KitArmor {
 		this.enchantmentLevels = new ArrayList<>();
 		this.type = type;
 		this.material = mat;
-		this.lore = lore;
-		this.name = name;
 		this.damageValue = damage;
-		this.color = color;
 		if (enchantment != null) {
 			String[] enchs = enchantment.split(";");
 			for (String str : enchs) {
@@ -89,27 +85,26 @@ public class KitArmor {
 			}
 		}
 		itemStack = new ItemStack(material);
+		itemMeta = itemStack.getItemMeta();
 		if (damageValue != 0) {
 			itemStack.setDurability((short) damageValue);
 		}
 		if (lore != null) {
-			ItemMeta im = itemStack.getItemMeta();
 			String[] lorelist = lore.split("|");
 			List<String> ll = new ArrayList<>();
 			for (String s : lorelist) {
 				ll.add(StringUtils.addChatColorToString(s));
 			}
-			im.setLore(ll);
+			itemMeta.setLore(ll);
 		}
 		if (name != null) {
-			ItemMeta im = itemStack.getItemMeta();
-			im.setDisplayName(StringUtils.addChatColorToString(name));
+			itemMeta.setDisplayName(StringUtils.addChatColorToString(name));
 		}
 		if (color != null) {
 			if (mat == Material.LEATHER_BOOTS || mat == Material.LEATHER_LEGGINGS || mat == Material.LEATHER_CHESTPLATE || mat == Material.LEATHER_HELMET) {
 				LeatherArmorMeta im = (LeatherArmorMeta) itemStack.getItemMeta();
 				im.setColor(StringUtils.getColorFromString(color));
-
+				itemStack.setItemMeta(im);
 			}
 		}
 		if (enchantments != null && enchantmentLevels != null) {
@@ -119,12 +114,13 @@ public class KitArmor {
 				itemStack.addEnchantment(ec, lev);
 			}
 		}
+		itemStack.setItemMeta(itemMeta);
 	}
 
 	/**
-	 * Applies the specific piece of armor to the player'slot according slot
+	 * Applies the specific piece of armor to the player's according slot
 	 *
-	 * @param potionEffect Player to apply armor to
+	 * @param p Player to apply the armor to
 	 */
 	public void apply(Player p) {
 		switch (type) {

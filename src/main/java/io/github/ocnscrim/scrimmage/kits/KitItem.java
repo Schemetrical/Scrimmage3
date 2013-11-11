@@ -23,9 +23,11 @@
  */
 package io.github.ocnscrim.scrimmage.kits;
 
+import io.github.ocnscrim.scrimmage.utils.Log;
 import io.github.ocnscrim.scrimmage.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -39,14 +41,12 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public class KitItem {
 
-	private int slot;
-	private Material material; //Not used
-        private List<Enchantment> enchantments;
-        private List<Integer> enchantmentLevels;
-        private String lore; //Unused
-        private String name; //Unused
-        private int damageValue;
-        private ItemStack itemStack;
+	private final Integer slot;
+	private final List<Enchantment> enchantments;
+	private final List<Integer> enchantmentLevels;
+	private final int damageValue;
+	private final ItemStack itemStack;
+	private final ItemMeta itemMeta;
 
 	/**
 	 * Constructor requesting all info about an item. It is possible for some
@@ -64,30 +64,37 @@ public class KitItem {
 		this.enchantments = new ArrayList<>();
 		this.enchantmentLevels = new ArrayList<>();
 		this.slot = slot;
-		this.material = mat;
-		this.lore = lore;
-		this.name = name;
 		this.damageValue = damage;
 		this.itemStack = new ItemStack(mat);
+		itemMeta = itemStack.getItemMeta();
+		if (enchantments != null) {
+			String[] enchs = echantment.split(";");
+			for (String str : enchs) {
+				String[] enchi = str.split(":");
+				Enchantment ench = StringUtils.getEnchantmentFromString(enchi[0]);
+				try {
+					Integer lvl = Integer.parseInt(enchi[1]);
+					enchantments.add(ench);
+					enchantmentLevels.add(lvl);
+				} catch (NumberFormatException ex) {
+					Log.log(Level.SEVERE, "[XML-Parse-Error] Could not parse integer from string!");
+				}
+			}
+		}
 		if (this.damageValue != 0) {
-		    itemStack.setDurability((short) damageValue);
+			itemStack.setDurability((short) damageValue);
 		}
 		if (lore != null) {
-			ItemMeta im = itemStack.getItemMeta();
 			String[] lorelist = lore.split("|");
 			List<String> ll = new ArrayList<>();
 			for (String str : lorelist) {
 				ll.add(StringUtils.addChatColorToString(str));
 			}
-			im.setLore(ll);
-			//You dont set the meta back
+			itemMeta.setLore(ll);
 		}
 		if (name != null) {
-			ItemMeta im = itemStack.getItemMeta();
-			im.setDisplayName(StringUtils.addChatColorToString(name));
-			//You dont set the meta back
+			itemMeta.setDisplayName(StringUtils.addChatColorToString(name));
 		}
-		//These arrays never get filled
 		if (enchantments != null && enchantmentLevels != null) {
 			int count = 0;
 			for (Enchantment ec : enchantments) {
@@ -95,16 +102,16 @@ public class KitItem {
 				itemStack.addEnchantment(ec, lev);
 			}
 		}
+		itemStack.setItemMeta(itemMeta);
 	}
 
 	/**
-	 * Adds the current item to amplifier slot in the player'slot inventory
+	 * Adds the current item to amplifier slot in the player's inventory
 	 *
-	 * @param potionEffect Player to apply the item to
+	 * @param p Player to apply the item to
 	 */
 	public void apply(Player p) {
-	    //Slot 0 is amplifier valid slot, the first one actually.
-		if (slot == 0) {
+		if (slot == null) {
 			p.getInventory().addItem(itemStack);
 		} else {
 			p.getInventory().setItem(slot, itemStack);
