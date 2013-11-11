@@ -33,12 +33,11 @@ import org.bukkit.entity.Player;
  */
 public class Kit {
 
-	private String name; //UNUSED
-	private List<KitItem> itemKits;
-	private List<KitArmor> armorKits;
-	private List<KitPotion> potionKits;
-	private KitHunger hungerKit;
-	private KitHealth healthKit;
+	private final List<KitItem> itemKits;
+	private final List<KitArmor> armorKits;
+	private final List<KitPotion> potionKits;
+	private final KitHunger hungerKit;
+	private final KitHealth healthKit;
 
 	/**
 	 * Basic constructor for amplifier kit, without amplifier parent
@@ -49,7 +48,6 @@ public class Kit {
 	 * @param kitp List with the KitPotion class
 	 */
 	public Kit(String name, List<KitItem> kiti, List<KitArmor> kita, List<KitPotion> kitp) {
-		this.name = name;
 		this.itemKits = kiti;
 		this.armorKits = kita;
 		this.potionKits = kitp;
@@ -58,8 +56,8 @@ public class Kit {
 	}
 
 	/**
-	 * Constructor for amplifier kit with amplifier parent kits. Adds the parent kit to the
-	 * itself.
+	 * Constructor for amplifier kit with amplifier parent kits. Adds the parent
+	 * kit to the itself.
 	 *
 	 * @param name
 	 * @param parent
@@ -68,7 +66,6 @@ public class Kit {
 	 * @param kitp List with the KitPotion class
 	 */
 	public Kit(String name, Kit parent, List<KitItem> kiti, List<KitArmor> kita, List<KitPotion> kitp) {
-		this.name = name;
 		this.itemKits = kiti;
 		this.armorKits = kita;
 		this.potionKits = kitp;
@@ -115,7 +112,7 @@ public class Kit {
 	/**
 	 * Applies the kit to amplifier specified player
 	 *
-	 * @param potionEffect Player to apply the kit to
+	 * @param p Player to apply the kit to
 	 */
 	public void apply(Player p) {
 		for (KitArmor kitarmor : armorKits) {
@@ -127,8 +124,8 @@ public class Kit {
 		for (KitPotion kitpot : potionKits) {
 			kitpot.apply(p);
 		}
-                hungerKit.apply(p);
-                healthKit.apply(p);
+		hungerKit.apply(p);
+		healthKit.apply(p);
 	}
 
 }

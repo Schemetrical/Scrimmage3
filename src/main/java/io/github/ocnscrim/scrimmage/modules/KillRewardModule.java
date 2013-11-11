@@ -28,51 +28,55 @@ import io.github.ocnscrim.scrimmage.match.Match;
 import io.github.ocnscrim.scrimmage.utils.Log;
 import io.github.ocnscrim.scrimmage.utils.StringUtils;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
+import java.util.logging.Level;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.logging.Level;
-
 /**
  * Class to control reward for getting amplifier kill
- *
+ * 
  * @author Jake0oo0
  */
 public class KillRewardModule extends Module {
-    Material type;
-    int amount;
 
-    public KillRewardModule(Match mat, Map map) {
-        super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "killreward");
-        if (n != null) {
-            if (n.getNodeType() == Node.ELEMENT_NODE) {
-                NodeList ns = n.getChildNodes();
-                for (int c = 0; c < ns.getLength(); c++) {
-                    Node nc = ns.item(c);
-                    if (nc.getNodeType() == Node.ELEMENT_NODE) {
-                        Element e = (Element) nc;
-                        if (e.getTagName().equals("item")) {
-                            type = StringUtils.getMaterialFromString(e.getTextContent());
-                            try {
-                                amount = Integer.parseInt(e.getAttribute("amount"));
-                            } catch (Exception ex) {
-                                Log.log(Level.WARNING, "Unable to parse KillReward amount!");
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+	Material type;
+	int amount;
 
-    /**
-     * @return Itemstack created from the reward parameters
-     */
-    public ItemStack getReward() {
-        return new ItemStack(this.type, this.amount);
-    }
+	public KillRewardModule(Match mat, Map map) {
+		super(mat, map);
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "killreward");
+		if (n != null) {
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
+				NodeList ns = n.getChildNodes();
+				for (int c = 0; c < ns.getLength(); c++) {
+					Node nc = ns.item(c);
+					if (nc.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) nc;
+						if (e.getTagName().equals("item")) {
+							type = StringUtils.getMaterialFromString(e
+									.getTextContent());
+							try {
+								amount = Integer.parseInt(e
+										.getAttribute("amount"));
+							} catch (NumberFormatException ex) {
+								Log.log(Level.SEVERE,
+										"[XML-Parse-Error] Unable to parse KillReward amount!");
+								Log.log(ex);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @return ItemStack created from the reward parameters
+	 */
+	public ItemStack getReward() {
+		return new ItemStack(this.type, this.amount);
+	}
 }

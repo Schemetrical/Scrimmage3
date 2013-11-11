@@ -30,31 +30,28 @@ import org.w3c.dom.Node;
 
 /**
  * Class to enable or disable the rage module
- *
+ * 
  * @author Jake0oo0
  */
 public class RageModule extends Module {
-    boolean enabled;
 
-    /**
-     * Default constructor using superclass Module constructor
-     *
-     * @param mat
-     * @param map
-     */
-    public RageModule(Match mat, Map map) {
-        super(mat, map);
-        enabled = false;
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "rage");
-        if (n != null) {
-            enabled = true;
-        } else {
-            enabled = false;
-        }
-    }
+	boolean enabled;
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+	/**
+	 * Default constructor using superclass Module constructor
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public RageModule(Match mat, Map map) {
+		super(mat, map);
+		enabled = false;
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "rage");
+		enabled = n != null;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
 
 }

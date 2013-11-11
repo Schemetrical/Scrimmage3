@@ -30,34 +30,34 @@ import org.w3c.dom.Node;
 
 /**
  * Class for managing trading with villagers
- *
+ * 
  * @author Jake0oo0
  */
 public class VillagerModule extends Module {
-    boolean multi;
 
-    /**
-     * Default constructor using superclass Module constructor
-     *
-     * @param mat
-     * @param map
-     */
-    public VillagerModule(Match mat, Map map) {
-        super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "multitrade");
-        multi = false;
-        if (n != null) {
-            multi = true;
-        }
-    }
+	boolean multi;
 
-    /**
-     * Returns boolean allowing multiple players to trade
-     * with villagers
-     *
-     * @return boolean allowing multiple traders at once
-     */
-    public boolean isMulti() {
-        return multi;
-    }
+	/**
+	 * Default constructor using superclass Module constructor
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public VillagerModule(Match mat, Map map) {
+		super(mat, map);
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "multitrade");
+		multi = false;
+		if (n != null) {
+			multi = true;
+		}
+	}
+
+	/**
+	 * Returns boolean allowing multiple players to trade with villagers
+	 * 
+	 * @return boolean allowing multiple traders at once
+	 */
+	public boolean isMulti() {
+		return multi;
+	}
 }

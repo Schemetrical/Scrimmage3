@@ -23,7 +23,6 @@
  */
 package io.github.ocnscrim.scrimmage.modules;
 
-
 import io.github.ocnscrim.scrimmage.map.Map;
 import io.github.ocnscrim.scrimmage.match.Match;
 import io.github.ocnscrim.scrimmage.utils.StringUtils;
@@ -32,44 +31,45 @@ import org.w3c.dom.Node;
 
 /**
  * Class for controlling day/night timelock
- *
+ * 
  * @author Jake0oo0
  */
 public class TimeLockModule extends Module {
-    boolean enabled;
-    int lockAt;
 
-    /**
-     * Default constructor using superclass Module constructor
-     *
-     * @param mat
-     * @param map
-     */
-    public TimeLockModule(Match mat, Map map) {
-        super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "timelock");
-        if (n != null) {
-            try {
-                lockAt = Integer.parseInt(n.getTextContent());
-                enabled = true;
-            } catch (NumberFormatException e) {
-                enabled = StringUtils.parseBoolean(n.getTextContent());
-            }
-        }
-    }
+	boolean enabled;
+	int lockAt;
 
-    /**
-     * @return Whether or not the timelock is enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
+	/**
+	 * Default constructor using superclass Module constructor
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public TimeLockModule(Match mat, Map map) {
+		super(mat, map);
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "timelock");
+		if (n != null) {
+			try {
+				lockAt = Integer.parseInt(n.getTextContent());
+				enabled = true;
+			} catch (NumberFormatException e) {
+				enabled = StringUtils.parseBoolean(n.getTextContent());
+			}
+		}
+	}
 
-    /**
-     * @return Tick to lock day/night cycle at
-     */
-    public int getLockAt() {
-        return lockAt;
-    }
+	/**
+	 * @return Whether or not the timelock is enabled
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	/**
+	 * @return Tick to lock day/night cycle at
+	 */
+	public int getLockAt() {
+		return lockAt;
+	}
 
 }

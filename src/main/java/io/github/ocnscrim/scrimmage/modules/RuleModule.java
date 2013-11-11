@@ -49,18 +49,18 @@ public class RuleModule extends Module {
 	 */
 	public RuleModule(Match mat, Map map) {
 		super(mat, map);
-		rules = new ArrayList<String>();
+		rules = new ArrayList<>();
 		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "rules");
 		if (n != null) {
 			if (n.getNodeType() == Node.ELEMENT_NODE) {
 				NodeList ns = n.getChildNodes();
-                    for (int c = 0; c < ns.getLength(); c++) {
-                        Node nc = ns.item(c);
-                        if (nc.getNodeType() == Node.ELEMENT_NODE) {
-                            Element e = (Element) nc;
-                            String rule = e.getTextContent();
-                            rules.add(rule);
-                        }
+				for (int c = 0; c < ns.getLength(); c++) {
+					Node nc = ns.item(c);
+					if (nc.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) nc;
+						String rule = e.getTextContent();
+						rules.add(rule);
+					}
 				}
 			}
 		}

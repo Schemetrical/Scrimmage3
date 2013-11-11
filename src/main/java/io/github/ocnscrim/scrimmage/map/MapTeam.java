@@ -34,9 +34,9 @@ import org.bukkit.ChatColor;
 public class MapTeam {
 
 	private String name;
-	private ChatColor color;
-	private Integer maxPlayers;
-	private Integer maxOverfill;
+	private final ChatColor color;
+	private final Integer maxPlayers;
+	private final Integer maxOverfill;
 
 	/**
 	 * Basic constructor for amplifier MapTeam, getting all parameters from
@@ -90,6 +90,7 @@ public class MapTeam {
 	/**
 	 * Sets the name of the team. Useful to rename teams with a command.
 	 * 
+	 * @param name
 	 * @set string with team name
 	 */
 	public void setName(String name) {

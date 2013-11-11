@@ -169,11 +169,7 @@ public class KitModule extends Module {
 													potiondur = 10;
 												}
 												if (ec.hasAttribute("ambient")) {
-													if (ec.getAttribute("ambient").equals("true")) {
-														ambient = true;
-													} else {
-														ambient = false;
-													}
+													ambient = ec.getAttribute("ambient").equals("true");
 												} else {
 													ambient = false;
 												}

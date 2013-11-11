@@ -51,7 +51,7 @@ public class DisableDamageModule extends Module {
 	 */
 	public DisableDamageModule(Match mat, Map map) {
 		super(mat, map);
-		damages = new ArrayList<EntityDamageEvent.DamageCause>();
+		damages = new ArrayList<>();
 		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "disabledamage");
 		if (n != null) {
 			if (n.getNodeType() == Node.ELEMENT_NODE) {

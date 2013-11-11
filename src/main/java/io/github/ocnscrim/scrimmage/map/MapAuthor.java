@@ -31,13 +31,13 @@ package io.github.ocnscrim.scrimmage.map;
  */
 public class MapAuthor {
 
-        private String name;
-        private String contribution;
-        private MapAuthorType type;
+	private final String name;
+	private final String contribution;
+	private final MapAuthorType type;
 
 	/**
-	 * Basic constructor for amplifier map author, includes all available information
-	 * about them.
+	 * Basic constructor for amplifier map author, includes all available
+	 * information about them.
 	 *
 	 * @param type
 	 * @param name

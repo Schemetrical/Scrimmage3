@@ -34,42 +34,46 @@ import org.w3c.dom.NodeList;
 
 /**
  * Class for modifying the projectile that amplifier bow shoots
- *
+ * 
  * @author Jake0oo0
  */
 public class ModifiedBowModule extends Module {
-    EntityType type;
 
-    /**
-     * Default constructor using superclass Module constructor
-     *
-     * @param mat
-     * @param map
-     */
-    public ModifiedBowModule(Match mat, Map map) {
-        super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "modifybowprojectile");
-        if (n != null) {
-            if (n.getNodeType() == Node.ELEMENT_NODE) {
-                NodeList ns = n.getChildNodes();
-                for (int c = 0; c < ns.getLength(); c++) {
-                    Node nc = ns.item(c);
-                    if (nc.getNodeType() == Node.ELEMENT_NODE) {
-                        Element e = (Element) nc;
-                        switch(e.getTagName()) {
-                            case "projectile":
-                                type = StringUtils.getEntityTypeFromString(e.getTextContent());
-                                break;
-                            case "velocity":
-                                 // Implement velocity support
-                        }
-                    }
-                }
-            }
-        }
-    }
+	EntityType type;
 
-    public EntityType getType() {
-        return type;
-    }
+	/**
+	 * Default constructor using superclass Module constructor
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public ModifiedBowModule(Match mat, Map map) {
+		super(mat, map);
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(),
+				"modifybowprojectile");
+		if (n != null) {
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
+				NodeList ns = n.getChildNodes();
+				for (int c = 0; c < ns.getLength(); c++) {
+					Node nc = ns.item(c);
+					if (nc.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) nc;
+						switch (e.getTagName()) {
+							case "projectile" :
+								type = StringUtils.getEntityTypeFromString(e
+										.getTextContent());
+								break;
+							case "velocity" :
+								// Implement velocity support
+								break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public EntityType getType() {
+		return type;
+	}
 }

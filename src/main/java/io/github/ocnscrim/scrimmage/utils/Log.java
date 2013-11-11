@@ -46,7 +46,6 @@ public class Log {
 
 	public static void log(Exception e) {
 		log(Level.SEVERE, e.getMessage());
-		e.printStackTrace();
 	}
 
 }

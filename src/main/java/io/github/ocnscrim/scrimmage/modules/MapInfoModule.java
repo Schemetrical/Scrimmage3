@@ -29,10 +29,8 @@ import io.github.ocnscrim.scrimmage.map.MapAuthor.MapAuthorType;
 import io.github.ocnscrim.scrimmage.map.MapProtocol;
 import io.github.ocnscrim.scrimmage.match.Match;
 import io.github.ocnscrim.scrimmage.utils.XMLUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.bukkit.Difficulty;
 import org.bukkit.World;
 import org.w3c.dom.Element;
@@ -48,14 +46,14 @@ import org.w3c.dom.NodeList;
  */
 public class MapInfoModule extends Module {
 
-	private MapProtocol mapProto;
+	private final MapProtocol mapProto;
 	private String mapName;
 	private String mapVersion;
 	private String mapObjective;
-	private List<MapAuthor> mapAuthors;
+	private final List<MapAuthor> mapAuthors;
 	private Difficulty difficulty;
 	private int maxbuildheigth;
-	private World.Environment dimension; //Not used
+	private World.Environment dimension;
 
 	/**
 	 * The basic constructor for MapInfoModule, has no function except to allow
@@ -86,35 +84,35 @@ public class MapInfoModule extends Module {
 
 		}
 		Node n_obj = XMLUtils.getFirstNodeByName(document.getDoc(), "objective");
-        if (n_obj != null) {
-            if (n_obj.getNodeType() == Node.ELEMENT_NODE) {
-                Element e_obj = (Element) n_obj;
-                mapObjective = e_obj.getTextContent();
-            }
+		if (n_obj != null) {
+			if (n_obj.getNodeType() == Node.ELEMENT_NODE) {
+				Element e_obj = (Element) n_obj;
+				mapObjective = e_obj.getTextContent();
+			}
 
-        }
-        Node n_dif = XMLUtils.getFirstNodeByName(document.getDoc(), "difficulty");
-        if (n_dif != null) {
-            if (n_dif.getNodeType() == Node.ELEMENT_NODE) {
-                Element e_dif = (Element) n_obj;
-                difficulty = Difficulty.getByValue(Integer.parseInt(e_dif.getTextContent()));
-            }
-        }
-        Node n_dim = XMLUtils.getFirstNodeByName(document.getDoc(), "dimension");
-        if (n_dim != null) {
-            if (n_dim.getNodeType() == Node.ELEMENT_NODE) {
-                Element e_dim = (Element) n_obj;
-                dimension = World.Environment.valueOf(e_dim.getTextContent().toUpperCase());
-            }
-        }
-        Node n_max = XMLUtils.getFirstNodeByName(document.getDoc(), "maxbuildheight");
-        if (n_max != null) {
-            if (n_max.getNodeType() == Node.ELEMENT_NODE) {
-                Element e_max = (Element) n_obj;
-                maxbuildheigth = Integer.parseInt(e_max.getTextContent());
-            }
-        }
-		mapAuthors = new ArrayList<MapAuthor>();
+		}
+		Node n_dif = XMLUtils.getFirstNodeByName(document.getDoc(), "difficulty");
+		if (n_dif != null) {
+			if (n_dif.getNodeType() == Node.ELEMENT_NODE) {
+				Element e_dif = (Element) n_obj;
+				difficulty = Difficulty.getByValue(Integer.parseInt(e_dif.getTextContent()));
+			}
+		}
+		Node n_dim = XMLUtils.getFirstNodeByName(document.getDoc(), "dimension");
+		if (n_dim != null) {
+			if (n_dim.getNodeType() == Node.ELEMENT_NODE) {
+				Element e_dim = (Element) n_obj;
+				dimension = World.Environment.valueOf(e_dim.getTextContent().toUpperCase());
+			}
+		}
+		Node n_max = XMLUtils.getFirstNodeByName(document.getDoc(), "maxbuildheight");
+		if (n_max != null) {
+			if (n_max.getNodeType() == Node.ELEMENT_NODE) {
+				Element e_max = (Element) n_obj;
+				maxbuildheigth = Integer.parseInt(e_max.getTextContent());
+			}
+		}
+		mapAuthors = new ArrayList<>();
 		Node n_aut = XMLUtils.getFirstNodeByName(document.getDoc(), "authors");
 		Node n_con = XMLUtils.getFirstNodeByName(document.getDoc(), "contributors");
 		if (n_aut != null) {
@@ -160,8 +158,8 @@ public class MapInfoModule extends Module {
 	}
 
 	/**
-	 * Returns the map name specific in the XML as amplifier string. Returns null if
-	 * there is no such node or if the node is not an element.
+	 * Returns the map name specific in the XML as amplifier string. Returns
+	 * null if there is no such node or if the node is not an element.
 	 *
 	 * @return map name string according to XML
 	 */
@@ -201,22 +199,22 @@ public class MapInfoModule extends Module {
 		return mapAuthors;
 	}
 
-    /**
-     * Returns max build height of amplifier map
-     *
-     * @return int max height
-     */
-    public int getMaxBuildHeight() {
-        return maxbuildheigth;
-    }
+	/**
+	 * Returns max build height of amplifier map
+	 *
+	 * @return integer max height
+	 */
+	public int getMaxBuildHeight() {
+		return maxbuildheigth;
+	}
 
-    /**
-     * Returns Minecraft difficulty of the map'slot world
-     *
-     * @return Difficulty
-     */
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
+	/**
+	 * Returns Minecraft difficulty of the map slot world
+	 *
+	 * @return Difficulty
+	 */
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
 
 }

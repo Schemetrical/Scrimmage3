@@ -33,56 +33,60 @@ import org.w3c.dom.NodeList;
 
 /**
  * Class to control friendly fire
- *
+ * 
  * @author Jake0oo0
  */
 public class FriendlyFireModule extends Module {
-    boolean friendlyFire;
-    boolean refund;
-    /**
-     * Default constructor using superclass Module constructor
-     *
-     * @param mat
-     * @param map
-     */
-    public FriendlyFireModule(Match mat, Map map) {
-        super(mat, map);
-        friendlyFire = false;
-        refund = true;
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "friendlyfire");
-        if (n != null) {
-            if (n.getNodeType() == Node.ELEMENT_NODE) {
-                NodeList ns = n.getChildNodes();
-                for (int c = 0; c < ns.getLength(); c++) {
-                    Node nc = ns.item(c);
-                    if (nc.getNodeType() == Node.ELEMENT_NODE) {
-                        Element e = (Element) nc;
-                        friendlyFire = StringUtils.parseBoolean(e.getTextContent());
-                    }
-                }
-            }
-        }
 
-        Node nF = XMLUtils.getFirstNodeByName(document.getDoc(), "friendlyfirerefund");
-        if (nF != null) {
-            if (nF.getNodeType() == Node.ELEMENT_NODE) {
-                NodeList ns = nF.getChildNodes();
-                for (int c = 0; c < ns.getLength(); c++) {
-                    Node nc = ns.item(c);
-                    if (nc.getNodeType() == Node.ELEMENT_NODE) {
-                        Element e = (Element) nc;
-                        refund = StringUtils.parseBoolean(e.getTextContent());
-                    }
-                }
-            }
-        }
-    }
+	boolean friendlyFire;
+	boolean refund;
 
-    public boolean isFriendlyFire() {
-        return friendlyFire;
-    }
+	/**
+	 * Default constructor using superclass Module constructor
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public FriendlyFireModule(Match mat, Map map) {
+		super(mat, map);
+		friendlyFire = false;
+		refund = true;
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "friendlyfire");
+		if (n != null) {
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
+				NodeList ns = n.getChildNodes();
+				for (int c = 0; c < ns.getLength(); c++) {
+					Node nc = ns.item(c);
+					if (nc.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) nc;
+						friendlyFire = StringUtils.parseBoolean(e
+								.getTextContent());
+					}
+				}
+			}
+		}
 
-    public boolean isRefund() {
-        return refund;
-    }
+		Node nF = XMLUtils.getFirstNodeByName(document.getDoc(),
+				"friendlyfirerefund");
+		if (nF != null) {
+			if (nF.getNodeType() == Node.ELEMENT_NODE) {
+				NodeList ns = nF.getChildNodes();
+				for (int c = 0; c < ns.getLength(); c++) {
+					Node nc = ns.item(c);
+					if (nc.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) nc;
+						refund = StringUtils.parseBoolean(e.getTextContent());
+					}
+				}
+			}
+		}
+	}
+
+	public boolean isFriendlyFire() {
+		return friendlyFire;
+	}
+
+	public boolean isRefund() {
+		return refund;
+	}
 }

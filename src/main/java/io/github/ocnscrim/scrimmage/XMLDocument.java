@@ -23,8 +23,10 @@
  */
 package io.github.ocnscrim.scrimmage;
 
+import io.github.ocnscrim.scrimmage.utils.Log;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -48,9 +50,21 @@ public class XMLDocument {
 			document = db.parse(fileLocation);
 			document.getDocumentElement().normalize();
 		} catch (SAXException ex) {
+			Log.log(Level.SEVERE,
+					"[XML-Parse-Error] Scrimmage generated a SAXException while parsing "
+							+ file.getName());
+			Log.log(ex);
 		} catch (IOException ex) {
+			Log.log(Level.SEVERE,
+					"[XML-Parse-Error] Scrimmage generated a IOException while parsing "
+							+ file.getName());
+			Log.log(ex);
 		} catch (ParserConfigurationException ex) {
-		} //YAY FOR NO CATCHING!!!
+			Log.log(Level.SEVERE,
+					"[XML-Parse-Error] Scrimmage generated a ParserConfigurationException while parsing "
+							+ file.getName());
+			Log.log(ex);
+		}
 	}
 
 	public Document getDoc() {

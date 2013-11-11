@@ -42,7 +42,7 @@ import org.w3c.dom.NodeList;
  */
 public class TeamModule extends Module {
 
-	private List<MapTeam> teams;
+	private final List<MapTeam> teams;
 
 	/**
 	 * Basic constructor for TeamModule, utilizing the the inherited constructor
@@ -53,7 +53,7 @@ public class TeamModule extends Module {
 	 */
 	public TeamModule(Match mat, Map map) {
 		super(mat, map);
-		teams = new ArrayList<MapTeam>();
+		teams = new ArrayList<>();
 		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "teams");
 		if (n != null) {
 			if (n.getNodeType() == Node.ELEMENT_NODE) {

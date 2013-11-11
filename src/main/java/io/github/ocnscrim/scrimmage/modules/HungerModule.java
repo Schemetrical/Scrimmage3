@@ -33,37 +33,38 @@ import org.w3c.dom.NodeList;
 
 /**
  * Class to handle depletion of hunger
- *
+ * 
  * @author Jake0oo0
  */
 public class HungerModule extends Module {
-    boolean depletes;
 
-    /**
-     * Default constructor using superclass Module constructor
-     *
-     * @param mat
-     * @param map
-     */
-    public HungerModule(Match mat, Map map) {
-        super(mat, map);
-        depletes = true;
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "hunger");
-        if (n != null) {
-            if (n.getNodeType() == Node.ELEMENT_NODE) {
-                NodeList ns = n.getChildNodes();
-                for (int c = 0; c < ns.getLength(); c++) {
-                    Node nc = ns.item(c);
-                    if (nc.getNodeType() == Node.ELEMENT_NODE) {
-                        Element e = (Element) nc;
-                        depletes = StringUtils.parseBoolean(e.getTextContent());
-                    }
-                }
-            }
-        }
-    }
+	boolean depletes;
 
-    public boolean isDepleting() {
-        return depletes;
-    }
+	/**
+	 * Default constructor using superclass Module constructor
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public HungerModule(Match mat, Map map) {
+		super(mat, map);
+		depletes = true;
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "hunger");
+		if (n != null) {
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
+				NodeList ns = n.getChildNodes();
+				for (int c = 0; c < ns.getLength(); c++) {
+					Node nc = ns.item(c);
+					if (nc.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) nc;
+						depletes = StringUtils.parseBoolean(e.getTextContent());
+					}
+				}
+			}
+		}
+	}
+
+	public boolean isDepleting() {
+		return depletes;
+	}
 }

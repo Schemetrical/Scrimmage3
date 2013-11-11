@@ -31,32 +31,33 @@ import org.w3c.dom.Node;
 
 /**
  * Module for managing match time
- *
+ * 
  * @author Jake0oo0
  */
 public class TimeModule extends Module {
-    private int length;
 
-    /**
-     * Default constructor using superclass Module constructor
-     *
-     * @param mat
-     * @param map
-     */
-    public TimeModule(Match mat, Map map) {
-        super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "time");
-        if (n != null) {
-            length = TimeUtils.parseTimeStringIntoSecs(n.getTextContent());
-        }
-    }
+	private int length;
 
-    /**
-     * Returns match length in seconds
-     *
-     * @return int match length
-     */
-    public int getMatchLength() {
-        return length;
-    }
+	/**
+	 * Default constructor using superclass Module constructor
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public TimeModule(Match mat, Map map) {
+		super(mat, map);
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "time");
+		if (n != null) {
+			length = TimeUtils.parseTimeStringIntoSecs(n.getTextContent());
+		}
+	}
+
+	/**
+	 * Returns match length in seconds
+	 * 
+	 * @return int match length
+	 */
+	public int getMatchLength() {
+		return length;
+	}
 }

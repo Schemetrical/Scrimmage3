@@ -33,12 +33,12 @@ import java.util.List;
  */
 public class MapProtocol {
 
-	private String protocolString;
-	private List<Integer> subversions;
+	private final String protocolString;
+	private final List<Integer> subversions;
 
 	public MapProtocol(String str) {
 		protocolString = str;
-		subversions = new ArrayList<Integer>();
+		subversions = new ArrayList<>();
 		String[] strs = protocolString.split(".");
 		for (String s : strs) {
 			subversions.add(Integer.parseInt(s));

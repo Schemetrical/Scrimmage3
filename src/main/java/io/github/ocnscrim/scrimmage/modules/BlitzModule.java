@@ -31,50 +31,51 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Class for controling Blitz gamemode
- *
+ * Class for controlling Blitz game-mode
+ * 
  * @author Jake0oo0
  */
 public class BlitzModule extends Module {
-    int lives;
-    String title;
 
-    /**
-     * Default constructor using superclass Module constructor
-     *
-     * @param mat
-     * @param map
-     */
-    public BlitzModule(Match mat, Map map) {
-        super(mat, map);
-        Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "blitz");
-        if (n != null) {
-            if (n.getNodeType() == Node.ELEMENT_NODE) {
-                NodeList ns = n.getChildNodes();
-                for (int c = 0; c < ns.getLength(); c++) {
-                    Node nc = ns.item(c);
-                    if (nc.getNodeType() == Node.ELEMENT_NODE) {
-                        Element e = (Element) nc;
-                        switch(e.getTagName()) {
-                            case "title":
-                                title = e.getTextContent();
-                                break;
-                            case "lives":
-                                lives = Integer.parseInt(e.getTextContent());
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+	int lives;
+	String title;
 
-    public int getLives() {
-        return lives;
-    }
+	/**
+	 * Default constructor using superclass Module constructor
+	 * 
+	 * @param mat
+	 * @param map
+	 */
+	public BlitzModule(Match mat, Map map) {
+		super(mat, map);
+		Node n = XMLUtils.getFirstNodeByName(document.getDoc(), "blitz");
+		if (n != null) {
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
+				NodeList ns = n.getChildNodes();
+				for (int c = 0; c < ns.getLength(); c++) {
+					Node nc = ns.item(c);
+					if (nc.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) nc;
+						switch (e.getTagName()) {
+							case "title" :
+								title = e.getTextContent();
+								break;
+							case "lives" :
+								lives = Integer.parseInt(e.getTextContent());
+								break;
+						}
+					}
+				}
+			}
+		}
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public int getLives() {
+		return lives;
+	}
+
+	public String getTitle() {
+		return title;
+	}
 
 }

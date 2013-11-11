@@ -32,8 +32,8 @@ import java.io.File;
  */
 public class Map {
 
-	private File mapDirectory;
-	private XMLDocument xmlDocument;
+	private final File mapDirectory;
+	private final XMLDocument xmlDocument;
 
 	public Map(File dir) {
 		mapDirectory = dir;
