@@ -11,7 +11,7 @@ _GitHub usernames go first, if IGN username is different it is mentioned in pare
 - msalihov - Project lead
 - Jake0oo0
 - RainoBoy97
-- molenzbwiesel
+- molenzwiebel
 - augustt198
 - TheAtro (AtroAtmx)
 - MasterEjay (MasterEjzz)
