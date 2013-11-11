@@ -40,7 +40,7 @@ import org.w3c.dom.NodeList;
  */
 public class FilterModule extends Module {
 
-	private List<Filter> filterList;
+	private final List<Filter> filterList;
 
 	/**
 	 * Basic constructor with parts inherited from superclass

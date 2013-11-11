@@ -23,28 +23,30 @@
  */
 package io.github.ocnscrim.scrimmage.utils;
 
+import java.util.logging.Level;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.EntityType;
+org.bukkit.entity.EntityType;
 import org.bukkit.entity.CreatureType;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.eventy.EntityDamagEntityTypeg.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import java.util.logging.Level;
+import java.utkit.event.entity.EntityDamageEvent;
 
-/**
- * Class with some string utilities
- * 
- * @author msalihov (Maxim Salikhov)
+bukkieventassentity.EntityDamageEvent some string utilities
+ *
+ * @author msalihov
+
+
+
+(Maxim Salikhov)
  */
 @SuppressWarnings("deprecation")
 public class StringUtils {
 
 	/**
 	 * Returns the ChatColor based on the string that has been put in
-	 * 
+	 *
 	 * @param s
 	 * @return ChatColor resulting from string
 	 */
@@ -55,7 +57,7 @@ public class StringUtils {
 
 	/**
 	 * Converts a hexadecimal color string into a Bukkit Color
-	 * 
+	 *
 	 * @param s
 	 * @return Bukkit Color
 	 */
@@ -65,7 +67,7 @@ public class StringUtils {
 
 	/**
 	 * Returns enchantment from based on the input string
-	 * 
+	 *
 	 * @param s
 	 * @return Enchantment based on string
 	 */
@@ -76,30 +78,35 @@ public class StringUtils {
 
 	/**
 	 * Adds ChatColor to a string
-	 * 
+	 *
 	 * @param s
 	 * @return String with ChatColor added
 	 */
 	public static String addChatColorToString(String s) {
 		s = ChatColor.translateAlternateColorCodes('`', s);
-		s = ChatColor.translateAlternateColorCodes('§', s);
+		s = ChatColor.translateAlternateColorCodes('ï¿½', s);
 		return s;
 	}
 
 	/**
 	 * Returns the Material based on the string put in
-	 * 
+	 *
 	 * @param s
 	 * @return Material resulting from string
 	 */
 	public static Material getMaterialFromString(String s) {
-		s = s.replaceAll(" ", "_").toUpperCase();
-		return Material.getMaterial(s);
+		try {
+			Integer itemId = Integer.parseInt(s);
+			return Material.getMaterial(itemId);
+		} catch (NumberFormatException ex) {
+			s = s.replaceAll(" ", "_").toUpperCase();
+			return Material.getMaterial(s);
+		}
 	}
 
 	/**
 	 * Returns the DamageCause based on the string that has been put in
-	 * 
+	 *
 	 * @param s
 	 * @return DamageCause resulting from string
 	 */
@@ -117,9 +124,11 @@ public class StringUtils {
 	 * @return Boolean created from on/off
 	 */
 	public static boolean parseBoolean(String s) {
-		if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")) return true;
-		else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")) return false;
-		else {
+		if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")) {
+			return true;
+		} else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")) {
+			return false;
+		} else {
 			Log.log(Level.WARNING, "Failed to parse boolean:" + s);
 			return false;
 		}
@@ -127,7 +136,7 @@ public class StringUtils {
 
 	/**
 	 * Returns the CreatureType based on the string that has been put in
-	 * 
+	 *
 	 * @param s
 	 * @return CreatureType resulting from string
 	 */
@@ -143,7 +152,7 @@ public class StringUtils {
 
 	/**
 	 * Returns the EntityType based on the string that has been put in
-	 * 
+	 *
 	 * @param s
 	 * @return EntityType resulting from string
 	 */
@@ -159,7 +168,7 @@ public class StringUtils {
 
 	/**
 	 * Returns if the string put in is a valid mob spawning reason
-	 * 
+	 *
 	 * @param s
 	 * @return if the string is a valid mob spawning reason.
 	 */
