@@ -27,19 +27,16 @@ import java.util.logging.Level;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
-org.bukkit.entity.EntityType;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.CreatureType;
-import org.bukkit.eventy.EntityDamagEntityTypeg.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.entity.EntityDamageEvent;
 
-import java.utkit.event.entity.EntityDamageEvent;
-
-bukkieventassentity.EntityDamageEvent some string utilities
+/**
+ * Class with some string utilities
  *
- * @author msalihov
-
-
-
-(Maxim Salikhov)
+ * @author msalihov (Maxim Salikhov)
  */
 @SuppressWarnings("deprecation")
 public class StringUtils {
@@ -84,7 +81,7 @@ public class StringUtils {
 	 */
 	public static String addChatColorToString(String s) {
 		s = ChatColor.translateAlternateColorCodes('`', s);
-		s = ChatColor.translateAlternateColorCodes('�', s);
+		s = ChatColor.translateAlternateColorCodes('§', s);
 		return s;
 	}
 
