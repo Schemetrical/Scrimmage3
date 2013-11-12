@@ -121,6 +121,11 @@ public class MapTeam {
 		return maxOverfill;
 	}
 	
+	/**
+	 * Returns if the specified player is a member of the team
+	 * 
+	 * @return boolean
+	 */
 	public boolean containsPlayer(String player){
 		if (members.contains(player)){
 			return true;
@@ -128,6 +133,11 @@ public class MapTeam {
 		return false;
 	}
 	
+	/**
+	 * Adds a player to the team
+	 * 
+	 * @param player
+	 */
 	public void addPlayer(String player){
 		if(members.size() <= maxPlayers){
 			return;
@@ -138,6 +148,11 @@ public class MapTeam {
 		members.add(player);
 	}
 	
+	/**
+	 * Removes a player from the team
+	 * 
+	 * @param player
+	 */
 	public void removePlayer(String player){
 		if(!members.contains(player)){
 			return;
