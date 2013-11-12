@@ -129,7 +129,7 @@ public class MapTeam {
 	}
 	
 	public void addPlayer(String player){
-		if(members.size() >= maxPlayers){
+		if(members.size() <= maxPlayers){
 			return;
 		}
 		if(members.contains(player)){
