@@ -59,7 +59,7 @@ public class TeamHandler {
 	/**
 	 * Adds a team to the list of teams
 	 * 
-	 * @param team
+	 * @param t
 	 */
 	public void addTeam(MapTeam t){
 		if(teams.contains(t)){
@@ -71,7 +71,7 @@ public class TeamHandler {
 	/**
 	 * Removes a team from the list of teams
 	 * 
-	 * @param team
+	 * @param t
 	 */
 	public void removeTeam(MapTeam t){
 		if(!teams.contains(t)){

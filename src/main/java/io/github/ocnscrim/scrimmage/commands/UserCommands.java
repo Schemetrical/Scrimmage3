@@ -21,32 +21,48 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-
 package io.github.ocnscrim.scrimmage.commands;
-
 
 import com.sk89q.minecraft.util.commands.Command;
 import com.sk89q.minecraft.util.commands.CommandContext;
+import io.github.ocnscrim.scrimmage.map.MapTeam;
+import io.github.ocnscrim.scrimmage.match.TeamHandler;
+import io.github.ocnscrim.scrimmage.modules.Module;
+import io.github.ocnscrim.scrimmage.modules.TeamModule;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+import java.util.List;
+import java.util.Random;
+
 /**
- * Class that manages all administrative commands
+ * Class that manages all user commands
  *
  * @author Eric Zeiberg (MasterEjay)
  */
+public class UserCommands {
+
+    TeamHandler teamHandler = new TeamHandler();
 
 
-public class AdminCommands {
+    @Command(aliases = {"join"}, desc = "Join a team", usage = "/join [team]" , min = 0, max = 1)
+    public void join(final CommandContext args, CommandSender sender) throws Exception {
+       if (args.argsLength() == 1){
+        if (teamHandler.getTeamByName(args.getString(1)) == null){
+            sender.sendMessage(ChatColor.RED + "That team could not be found! Perhaps you are spelling it wrong");
+            return;
+        }
+        MapTeam team = teamHandler.getTeamByName(args.getString(1));
+        team.addPlayer(sender.getName());
+        sender.sendMessage("You have joined " + team.getColor() + team.getName() + ".");
 
-    @Command(aliases = {"start"}, desc = "Starts the match", usage = "/start <seconds>" , min = 0, max = 1)
-    public static void start(final CommandContext args, CommandSender sender) throws Exception {
-         if (args.argsLength() == 1){
-             sender.sendMessage(ChatColor.RED + "This function is not supported yet!");
-             sender.sendMessage(ChatColor.YELLOW + "Countdown time set to " + args.getInteger(1));
-         }
-        else {
-             sender.sendMessage(ChatColor.RED + "This function is not supported yet!");
-         }
+       }
+        if (args.argsLength() == 0){
+             List<MapTeam> teams = teamHandler.getAllTeams();
+             MapTeam randomTeam = teams.get(new Random().nextInt(teams.size()));
+            randomTeam.addPlayer(sender.getName());
+            sender.sendMessage("You have joined " + randomTeam.getColor() + randomTeam.getName() + ".");
+        }
     }
+
 }
