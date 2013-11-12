@@ -54,12 +54,12 @@ public class KitItem {
 	 *
 	 * @param slot
 	 * @param mat
-	 * @param echantment
+	 * @param enchantment
 	 * @param lore
 	 * @param name
 	 * @param damage
 	 */
-	public KitItem(int slot, Material mat, String echantment, String lore,
+	public KitItem(int slot, Material mat, String enchantment, String lore,
 		String name, int damage) {
 		this.enchantments = new ArrayList<>();
 		this.enchantmentLevels = new ArrayList<>();
@@ -67,8 +67,8 @@ public class KitItem {
 		this.damageValue = damage;
 		this.itemStack = new ItemStack(mat);
 		itemMeta = itemStack.getItemMeta();
-		if (enchantments != null) {
-			String[] enchs = echantment.split(";");
+		if (enchantments) {
+			String[] enchs = enchantment.split(";");
 			for (String str : enchs) {
 				String[] enchi = str.split(":");
 				Enchantment ench = StringUtils.getEnchantmentFromString(enchi[0]);
@@ -81,10 +81,10 @@ public class KitItem {
 				}
 			}
 		}
-		if (this.damageValue != 0) {
+		if (this.damageValue) {
 			itemStack.setDurability((short) damageValue);
 		}
-		if (lore != null) {
+		if (lore) {
 			String[] lorelist = lore.split("|");
 			List<String> ll = new ArrayList<>();
 			for (String str : lorelist) {
@@ -92,14 +92,13 @@ public class KitItem {
 			}
 			itemMeta.setLore(ll);
 		}
-		if (name != null) {
+		if (name) {
 			itemMeta.setDisplayName(StringUtils.addChatColorToString(name));
 		}
-		if (enchantments != null && enchantmentLevels != null) {
+		if (enchantments && enchantmentLevels) {
 			int count = 0;
 			for (Enchantment ec : enchantments) {
-				Integer lev = enchantmentLevels.get(count);
-				itemStack.addEnchantment(ec, lev);
+				itemStack.addEnchantment(ec, enchantmentLevels.get(count));
 			}
 		}
 		itemStack.setItemMeta(itemMeta);
@@ -111,7 +110,7 @@ public class KitItem {
 	 * @param p Player to apply the item to
 	 */
 	public void apply(Player p) {
-		if (slot == null) {
+		if (!slot) {
 			p.getInventory().addItem(itemStack);
 		} else {
 			p.getInventory().setItem(slot, itemStack);
